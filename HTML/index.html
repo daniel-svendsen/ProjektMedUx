@@ -4,47 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue API Test</title>
-    <script src="https://unpkg.com/vue@3.2.47" integrity="sha384-mgp1hnBYcnmsGPH4Gggyec1hk0SHNDFRiPziZ9r5ZfLLV9nr5uLprnqdOCR5sQHQ" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3.2.47"></script>
 </head>
 <body>
-    <div id="app">
-        <!-- Visa JSON-data på sidan -->
-        <pre>{{ apiData }}</pre>
-    </div>
-
-    <script>
-      Vue.createApp({
-          data() {
-              return {
-                  apiData: null,
-                  category: 'pmp3g', // Ersätt 'yourCategory' med den kategori du vill använda
-                  version: '2', // Ersätt '1.0' med den version du vill använda
-                  longitude: '16.158', // Ersätt med önskad longitud
-                  latitude: '58.5812', // Ersätt med önskad latitud
-              }
-          },
-          methods: {
-              fetchApiData() {
-                  const url = `https://opendata-download-metfcst.smhi.se/api/category/${this.category}/version/${this.version}/geotype/point/lon/${this.longitude}/lat/${this.latitude}/data.json`
-                  fetch(url)
-                      .then(response => {
-                          if (!response.ok) {
-                              throw new Error('Network response was not ok');
-                          }
-                          return response.json();
-                      })
-                      .then(data => {
-                          this.apiData = JSON.stringify(data, null, 2);
-                      })
-                      .catch(error => {
-                          console.error('There was a problem with your fetch operation:', error);
-                      });
-              }
-          },
-          mounted() {
-              this.fetchApiData();
-          }
-      }).mount("#app")
-  </script>
+<div id="app"> <!-- Visa JSON-data på sidan -->
+    <pre>{{ apiData }}</pre>
+</div>
+<script src="../SCRIPT/getdata.js"></script>
 </body>
 </html>
