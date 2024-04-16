@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue API Test</title>
-    <script src="https://unpkg.com/vue@3.2.47"></script>
+
+    <script src="https://unpkg.com/vue@3.4.21"
+        integrity="sha384-8CdW77YPqMZ3v22pThUIR22Qp1FB5oisZG2WE3OpE0l1fTHAIsdIwjQZFf/rmQ/B"
+        crossorigin="anonymous"></script>
+    <script defer src="../SCRIPT/getPosition.js"></script>
+    <script type="module" defer src="../SCRIPT/fetchData.js"></script>
 </head>
+
 <body>
-<div id="app"> <!-- Visa JSON-data på sidan -->
-    <pre>{{ apiData }}</pre>
-</div>
-<script src="../SCRIPT/getdata.js"></script>
+    <div id="app">
+        <!-- Position -->
+        <div class="position">
+            <h2>Position</h2>
+            <!-- Visa placeholder-text om longitud och latitud är null -->
+            <p v-if="longitude === null || latitude === null">Fetching position...</p>
+            <!-- Visa longitud och latitud om de finns tillgängliga -->
+            <p v-else>
+                Longitude: {{ longitude }} <br>
+                Latitude: {{ latitude }}
+            </p>
+        </div>
+    
+        <!-- Weather Data -->
+        <div class="weather-data">
+            <h2>Weather Data</h2>
+            <!-- Visa placeholder-text om weatherData är null -->
+            <p v-if="weatherData === null">Fetching weather data...</p>
+            <!-- Visa väderdatan om den är tillgänglig -->
+            <pre v-else>{{ weatherData }}</pre>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
