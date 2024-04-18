@@ -27,15 +27,22 @@
             </p>
         </div>
     
-        <!-- Weather Data -->
         <div class="weather-data">
             <h2>Weather Data</h2>
-            <!-- Visa placeholder-text om weatherData är null -->
-            <p v-if="weatherData === null">Fetching weather data...</p>
-            <!-- Visa väderdatan om den är tillgänglig -->
-            <pre v-else>{{ weatherData }}</pre>
+            <!-- Visa placeholder-text om transformedData är null -->
+            <p v-if="transformedData === null">Fetching weather data...</p>
+            <!-- Visa omvandlade namn om de är tillgängliga -->
+            <div v-else>
+                <div v-for="(entry, index) in transformedData" :key="index" class="weather-entry">
+                    <h3>Tid: {{ entry.validTime }}</h3>
+                    <ul>
+                        <li v-for="(param, paramIndex) in entry.parameters" :key="paramIndex">
+                            {{ param.name }}: {{ param.values[0] }} {{ param.unit }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
 
 
 </body>

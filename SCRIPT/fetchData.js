@@ -1,4 +1,5 @@
 import { getPosition } from '../SCRIPT/getPosition.js';
+import { transformWeatherData } from '../SCRIPT/translateWeatherData.js';
 
 const app = Vue.createApp({
     data() {
@@ -7,7 +8,8 @@ const app = Vue.createApp({
             category: 'pmp3g',
             version: 2,
             longitude: null,
-            latitude: null
+            latitude: null,
+            transformedData: null // Uppdaterad data för att bara visa omvandlade namn
         };
     },
     methods: {
@@ -16,7 +18,10 @@ const app = Vue.createApp({
 
             try {
                 const response = await fetch(url);
-                this.weatherData = await response.json();
+                const rawWeatherData = await response.json();
+                
+                // Använd omvandlingsfunktionen för att omvandla datan
+                this.transformedData = transformWeatherData(rawWeatherData);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
             }
