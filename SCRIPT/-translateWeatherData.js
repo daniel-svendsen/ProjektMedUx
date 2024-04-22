@@ -72,10 +72,7 @@ const cloudCoverMappings = {
 
 export function transformWeatherData(weatherData) {
     return weatherData.timeSeries.map(entry => {
-        const transformedParameters = entry.parameters.filter(param => {
-            // Välj endast de parametrar som är relevanta: 'Wsymb2', 't', 'pmean', 'ws'
-            return ['Wsymb2', 't', 'pmean', 'ws'].includes(param.name);
-        }).map(param => {
+        const transformedParameters = entry.parameters.map(param => {
             let transformedValue = param.values[0];
             switch (param.name) {
                 case 'Wsymb2':
@@ -84,20 +81,28 @@ export function transformWeatherData(weatherData) {
                         param.unit = ''; // Ta bort enheten helt
                     }
                     break;
-                case 't':
-                    // Lägg till enhet för temperatur
-                    param.unit = '°C';
+                case 'pcat':
+                    transformedValue = precipitationCategoryMappings[transformedValue] || transformedValue;
+                    if (param.unit === 'category') {
+                        param.unit = ''; // Ta bort enheten helt
+                    }
                     break;
-                case 'pmean':
-                    // Lägg till enhet för genomsnittlig nederbörd
-                    param.unit = 'mm';
-                    break;
-                case 'ws':
-                    // Lägg till enhet för vindstyrka
-                    param.unit = 'm/s';
+                case 'tcc_mean':
+                case 'lcc_mean':
+                case 'mcc_mean':
+                case 'hcc_mean':
+                    transformedValue = cloudCoverMappings[param.name] || transformedValue;
                     break;
                 default:
                     transformedValue = param.values[0];
+            }
+            // Byt ut "percent" mot "procent"
+            if (param.unit === 'percent') {
+                param.unit = 'procent';
+            }
+            // Byt ut "degree" mot "grader"
+            if (param.unit === 'degree') {
+                param.unit = 'grader';
             }
             const readableName = parameterMappings[param.name] || param.name;
             return { ...param, name: readableName, values: [transformedValue] };
