@@ -1,15 +1,23 @@
 import { getPosition } from '../SCRIPT/getPosition.js';
 import { transformWeatherData } from '../SCRIPT/translateWeatherData.js';
+import { filterWeatherDataByTime } from '../SCRIPT/filterWeatherDataByTime.js';
 
 const app = Vue.createApp({
     data() {
         return {
-            weatherData: null,
+            specificWeatherData: null, // Weather data for specific times
+            usualWeatherData: null,    // Weather data as usual
             category: 'pmp3g',
             version: 2,
             longitude: null,
             latitude: null,
-            transformedData: null // Uppdaterad data för att bara visa omvandlade namn
+            transformedData: null, // Updated data to display transformed names only
+            outfitSuggestions: {
+                '0800': '',
+                '1200': '',
+                '1600': '',
+                '2000': ''
+            }
         };
     },
     methods: {
@@ -19,9 +27,19 @@ const app = Vue.createApp({
             try {
                 const response = await fetch(url);
                 const rawWeatherData = await response.json();
-                
-                // Använd omvandlingsfunktionen för att omvandla datan
+
+                // Transform weather data
                 this.transformedData = transformWeatherData(rawWeatherData);
+
+                // Filter weather data for specific times
+                this.specificWeatherData = filterWeatherDataByTime(this.transformedData);
+
+                // Set usual weather data (exclude specific times)
+                this.usualWeatherData = this.transformedData.filter(entry => {
+                    const time = new Date(entry.validTime);
+                    const hour = time.getUTCHours();
+                    return ![8, 12, 16, 20].includes(hour);
+                });
             } catch (error) {
                 console.error('Error fetching weather data:', error);
             }

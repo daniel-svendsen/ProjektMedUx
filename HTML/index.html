@@ -11,6 +11,8 @@
         crossorigin="anonymous"></script>
     <script type="module" defer src="../SCRIPT/getPosition.js"></script>
     <script type="module" defer src="../SCRIPT/fetchData.js"></script>
+    <script type="module" defer src="../SCRIPT/translateWeatherData.js"></script>
+    <script type="module" defer src="../SCRIPT/filterWeatherDataByTime.js"></script>
 </head>
 
 <body>
@@ -18,20 +20,41 @@
         <!-- Position -->
         <div class="position">
             <h2>Position</h2>
-            <!-- Visa placeholder-text om longitud och latitud är null -->
-            <p v-if="longitude === null || latitude === null">Fetching position...</p>
-            <!-- Visa longitud och latitud om de finns tillgängliga -->
-            <p v-else>
+            <!-- Show latitude and longitude -->
+            <p v-if="longitude && latitude">
                 Longitude: {{ longitude }} <br>
                 Latitude: {{ latitude }}
             </p>
+            <!-- Show fetching message if latitude or longitude is null -->
+            <p v-else>
+                Fetching position...
+            </p>
         </div>
-    
-        <div class="weather-data">
-            <h2>Weather Data</h2>
-            <!-- Visa placeholder-text om transformedData är null -->
-            <p v-if="transformedData === null">Fetching weather data...</p>
-            <!-- Visa omvandlade namn om de är tillgängliga -->
+
+        <!-- Weather Data for Specific Times -->
+        <div class="specific-weather">
+            <h2>Weather Data for Specific Times</h2>
+            <!-- Show fetching message if specificWeatherData is null -->
+            <p v-if="specificWeatherData === null">Fetching specific weather data...</p>
+            <!-- Show specific weather data -->
+            <div v-else>
+                <div v-for="(entry, index) in specificWeatherData" :key="index" class="weather-entry">
+                    <h3>Tid: {{ entry.validTime }}</h3>
+                    <ul>
+                        <li v-for="(param, paramIndex) in entry.parameters" :key="paramIndex">
+                            {{ param.name }}: {{ param.values[0] }} {{ param.unit }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Data as Usual -->
+        <div class="usual-weather">
+            <h2>Weather Data as Usual</h2>
+            <!-- Show fetching message if transformedData is null -->
+            <p v-if="transformedData === null">Fetching usual weather data...</p>
+            <!-- Show usual weather data -->
             <div v-else>
                 <div v-for="(entry, index) in transformedData" :key="index" class="weather-entry">
                     <h3>Tid: {{ entry.validTime }}</h3>
@@ -43,8 +66,7 @@
                 </div>
             </div>
         </div>
-
-
+    </div>
 </body>
 
 </html>
