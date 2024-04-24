@@ -12,12 +12,6 @@ const app = Vue.createApp({
             longitude: null,
             latitude: null,
             transformedData: null, // Updated data to display transformed names only
-            outfitSuggestions: {
-                '0800': '',
-                '1200': '',
-                '1600': '',
-                '2000': ''
-            }
         };
     },
     methods: {
