@@ -15,7 +15,7 @@ const app = Vue.createApp({
         };
     },
     methods: {
-        async fetchWeatherData() {
+         async fetchWeatherData() {
             const url = `https://opendata-download-metfcst.smhi.se/api/category/${this.category}/version/${this.version}/geotype/point/lon/${this.longitude}/lat/${this.latitude}/data.json`;
 
             try {
