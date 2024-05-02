@@ -1,52 +1,33 @@
+<!-- DataBySpecificTime.vue -->
 <template>
     <div>
-        <h1>Specific Weather Data</h1>
-        <div v-if="loading">Loading...</div>
-        <div v-else>
-            <div v-for="(entry, index) in transformedData" :key="index">
-                <h2>{{ entry.validTime }}</h2>
-                <ul>
-                    <li v-for="param in entry.parameters" :key="param.name">
-                        {{ param.name }}: {{ param.values[0] }}{{ param.unit }}
-                    </li>
-                </ul>
-            </div>
-        </div>
+        specificWeatherData
     </div>
 </template>
 
 <script>
-import { fetchWeatherData } from "../scripts/getWeather.js";
-import { transformWeatherData } from "../scripts/translateData.js";
-import { useGeolocation } from "../scripts/getPosition.js";
-import { filterWeatherDataByTime } from '../scripts/filterWeatherDataByTime.js'
+import { transformWeatherData } from '../scripts/translateData';
+import { filterWeatherDataByTime } from '../scripts/filterWeatherDataByTime';
 
 export default {
-    data() {
-        return {
-            loading: true,
-            filteredData: null
-        };
-    },
-    async created() {
+    async fetchWeatherData(latitude, longitude) {
+        const url = `https://opendata-download-metfcst.smhi.se/api/category/${this.category}/version/${this.version}/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+
         try {
-            // Call useGeolocation to get latitude and longitude
-            const { latitude, longitude } = await useGeolocation();
-
-            // Fetch weather data using obtained latitude and longitude
-            const weatherData = await fetchWeatherData(latitude, longitude);
-
-            if (!weatherData || !weatherData.timeSeries) {
-                throw new Error('Weather data is missing or has an unexpected structure');
-            }
+            const response = await fetch(url);
+            const rawWeatherData = await response.json();
 
             // Transform weather data
-            this.transformedData = await transformWeatherData(weatherData);
-            this.filteredData = await filterWeatherDataByTime(this.transformedData);
-            this.loading = false;
+            const transformedData = transformWeatherData(rawWeatherData);
+
+            // Filter weather data for specific times
+            const specificWeatherData = filterWeatherDataByTime(transformedData);
+
+            // Return the fetched data
+            return { specificWeatherData };
         } catch (error) {
-            console.error("Error fetching weather data:", error);
-            this.loading = false;
+            console.error('Error fetching weather data:', error);
+            throw error; // Rethrow the error for handling in the caller
         }
     }
 };
