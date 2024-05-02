@@ -34,7 +34,7 @@ import GetPosition from './components/GetPosition.vue';
       </div>
     </header>
 
-    <RouterView />
+    <router-view></router-view>
   </div>
 </template>
 <style scoped></style>
