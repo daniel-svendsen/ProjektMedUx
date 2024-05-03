@@ -8,11 +8,6 @@
 
 <script>
 export default {
-    data() {
-        return {
-            position: null,
-        };
-    },
     created() {
         this.getPosition();
     },
@@ -23,9 +18,8 @@ export default {
                     (position) => {
                         const latitude = position.coords.latitude.toFixed(4);
                         const longitude = position.coords.longitude.toFixed(4);
-                        this.position = { latitude, longitude };
-                        // Emit the position to the parent component
-                        this.$emit('position-updated', this.position);
+                        // Emit position as an event
+                        this.$emit('position-updated', { latitude, longitude });
                     },
                     (error) => {
                         console.error("Error getting position:", error.message);

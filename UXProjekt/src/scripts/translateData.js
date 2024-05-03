@@ -24,7 +24,7 @@ const parameterMappings = {
 // Kartläggning av värden för vädersymbolen (Wsymb2) till betydelser
 const weatherSymbolMappings = {
     1: 'Klar himmel',
-    2: 'Nästan klart himmel',
+    2: 'Nästan klar himmel',
     3: 'Skiftande molnighet',
     4: 'Halvklar himmel',
     5: 'Molnigt',
@@ -52,11 +52,23 @@ const weatherSymbolMappings = {
     27: 'Kraftigt snöfall'
 };
 
+// Define the function to convert a given date to UTC+2
+function convertToUTCPlus2(date) {
+    // Assuming date is in local time
+    const offset = date.getTimezoneOffset(); // Get the time zone offset in minutes
+    const utcTime = date.getTime() + (offset * 60000); // Convert to UTC time in milliseconds
+    const utcPlus2Time = utcTime + (2 * 3600000); // Add 2 hours for UTC+2 in milliseconds
+    const utcPlus2Date = new Date(utcPlus2Time); // Convert the UTC+2 time to a Date object
+
+    // Format the date to remove the timezone offset
+    const formattedDate = utcPlus2Date.toLocaleString('sv-SE', { timeZone: 'UTC' });
+    return new Date(formattedDate); // Return the formatted UTC+2 time as a Date object
+}
+
 
 export function transformWeatherData(weatherData) {
     return weatherData.timeSeries.map(entry => {
         const transformedParameters = entry.parameters.filter(param => {
-            // Välj endast de parametrar som är relevanta: 'Wsymb2', 't', 'pmean', 'ws'
             return ['Wsymb2', 't', 'pmean', 'ws'].includes(param.name);
         }).map(param => {
             let transformedValue = param.values[0];
@@ -64,20 +76,17 @@ export function transformWeatherData(weatherData) {
                 case 'Wsymb2':
                     transformedValue = weatherSymbolMappings[transformedValue] || transformedValue;
                     if (param.unit === 'category') {
-                        param.unit = ''; // Ta bort enheten helt
+                        param.unit = ''; // Remove the unit entirely
                     }
                     break;
                 case 't':
-                    // Lägg till enhet för temperatur
-                    param.unit = '°C';
+                    param.unit = '°C'; // Add the temperature unit
                     break;
                 case 'pmean':
-                    // Lägg till enhet för genomsnittlig nederbörd
-                    param.unit = 'mm';
+                    param.unit = 'mm'; // Add the unit for average precipitation
                     break;
                 case 'ws':
-                    // Lägg till enhet för vindstyrka
-                    param.unit = 'm/s';
+                    param.unit = 'm/s'; // Add the unit for wind speed
                     break;
                 default:
                     transformedValue = param.values[0];
@@ -85,6 +94,8 @@ export function transformWeatherData(weatherData) {
             const readableName = parameterMappings[param.name] || param.name;
             return { ...param, name: readableName, values: [transformedValue] };
         });
-        return { ...entry, parameters: transformedParameters };
+        // Convert the timestamp to UTC+2
+        const utcPlus2Time = convertToUTCPlus2(new Date(entry.validTime));
+        return { ...entry, parameters: transformedParameters, validTime: utcPlus2Time };
     });
 }
