@@ -19,3 +19,11 @@ app.mount('#app')
 const userStore = useUserStore();
 userStore.fetchUsers();
 
+if (!userStore.users.length) {
+    // Om ingen användare finns, navigera till SettingsView
+    router.push({ name: 'Settings' });
+} else {
+    // Om användare finns, navigera till HomeView
+    router.push({ name: 'Home' });
+}
+
