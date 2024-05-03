@@ -56,11 +56,15 @@ const weatherSymbolMappings = {
 function convertToUTCPlus2(date) {
     // Assuming date is in local time
     const offset = date.getTimezoneOffset(); // Get the time zone offset in minutes
-    const localTime = date.getTime(); // Get the local time in milliseconds
-    const utcTime = localTime + (offset * 60000); // Convert to UTC time in milliseconds
+    const utcTime = date.getTime() + (offset * 60000); // Convert to UTC time in milliseconds
     const utcPlus2Time = utcTime + (2 * 3600000); // Add 2 hours for UTC+2 in milliseconds
-    return new Date(utcPlus2Time); // Return the UTC+2 time as a Date object
+    const utcPlus2Date = new Date(utcPlus2Time); // Convert the UTC+2 time to a Date object
+
+    // Format the date to remove the timezone offset
+    const formattedDate = utcPlus2Date.toLocaleString('sv-SE', { timeZone: 'UTC' });
+    return new Date(formattedDate); // Return the formatted UTC+2 time as a Date object
 }
+
 
 export function transformWeatherData(weatherData) {
     return weatherData.timeSeries.map(entry => {

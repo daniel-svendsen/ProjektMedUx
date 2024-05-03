@@ -2,15 +2,13 @@
   <div>
     <h1 class="title">Specifik väderdata</h1>
     <div v-if="loading">Laddar...</div>
-    <div v-else>
-      <div v-for="(entry, index) in filteredData" :key="index" class="weather-entry">
-        <h2 class="entry-title">{{ entry.validTime }}</h2>
-        <ul class="weather-params">
-          <li v-for="param in entry.parameters" :key="param.name" class="param-item">
-            <span class="param-name">{{ param.name }}:</span>
-            <span class="param-value">{{ param.values[0] }}{{ param.unit }}</span>
-          </li>
-        </ul>
+    <div v-else class="weather-container">
+      <div v-for="(weatherObj, index) in weatherObjects" :key="index" class="weather-entry">
+        <p>{{ weatherObj.date }}</p>
+        <p>Genomsnittlig nederbörd: {{ weatherObj.averagePrecipitation }}</p>
+        <p>Temperatur: {{ weatherObj.temperature }}</p>
+        <p>Vindstyrka: {{ weatherObj.windSpeed }}</p>
+        <p>Vädersymbol: {{ weatherObj.weatherSymbol }}</p>
       </div>
     </div>
   </div>
@@ -26,7 +24,7 @@ export default {
   data() {
     return {
       loading: true,
-      filteredData: null
+      weatherObjects: []
     };
   },
   async created() {
@@ -45,7 +43,21 @@ export default {
       const transformedData = await transformWeatherData(weatherData);
 
       // Filter weather data by time
-      this.filteredData = await filterWeatherDataByTime(transformedData);
+      const filteredData = await filterWeatherDataByTime(transformedData);
+
+      // Convert each entry to an object and push to weatherObjects array
+      filteredData.forEach(entry => {
+        const weatherObj = {
+          date: entry.validTime,
+          //date: new Date(entry.validTime).toLocaleDateString('sv-SE'), // Extrahera datum och formatera det
+          //time: new Date(entry.validTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' }), // Extrahera tid och formatera det
+          averagePrecipitation: entry.parameters.find(param => param.name === 'Genomsnittlig nederbörd').values[0],
+          temperature: entry.parameters.find(param => param.name === 'Temperatur').values[0],
+          windSpeed: entry.parameters.find(param => param.name === 'Vindstyrka').values[0],
+          weatherSymbol: entry.parameters.find(param => param.name === 'Vädersymbol').values[0]
+        };
+        this.weatherObjects.push(weatherObj);
+      });
 
       this.loading = false;
     } catch (error) {
@@ -56,40 +68,20 @@ export default {
 };
 </script>
 
-
 <style>
-.title {
-  font-size: 10px;
-  /* Justera storleken på titeln enligt önskad storlek */
-}
-
-.entry-title {
-  font-size: 10px;
-  /* Justera storleken på titlarna för varje post enligt önskad storlek */
-}
-
-.weather-entry {
-  margin-bottom: 10px;
-}
-
-.weather-params {
-  list-style: none;
-  padding: 0;
+/* Anpassar layouten för väderdatan */
+.weather-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.param-item {
-  margin-right: 20px;
-}
-
-.param-name {
-  font-weight: bold;
-  margin-right: 5px;
+/* Justerar storleken på varje väderpost */
+.weather-entry {
+  width: calc(25% - 20px);
+  /* Bredden för varje post */
+  margin-bottom: 20px;
+  /* Avstånd mellan varje post */
   font-size: 10px;
-}
-
-.param-value {
-  font-size: 10px;
-  /* Justera storleken på värdena enligt önskad storlek */
 }
 </style>
