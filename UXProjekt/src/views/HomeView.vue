@@ -3,7 +3,7 @@
     <h1 class="title">Specifik väderdata</h1>
     <div v-if="loading">Laddar...</div>
     <div v-else class="weather-container">
-      <div v-for="(weatherObj, index) in weatherObjects" :key="index" class="weather-entry">
+      <div v-for="(weatherObj, index) in weatherObjects.slice(0, 4)" :key="index" class="weather-entry">
         <p>{{ weatherObj.date }}</p>
         <p>Genomsnittlig nederbörd: {{ weatherObj.averagePrecipitation }}</p>
         <p>Temperatur: {{ weatherObj.temperature }}</p>
