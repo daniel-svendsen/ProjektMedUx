@@ -1,4 +1,8 @@
+<!-- HomeView.vue -->
 <template>
+  <div>
+    <!-- <ClothesForTheDay /> -->
+  </div>
   <div>
     <h1 class="title">Specifik väderdata</h1>
     <div v-if="loading">Laddar...</div>
@@ -19,6 +23,7 @@ import { fetchWeatherData } from "../scripts/getWeather.js";
 import { transformWeatherData } from "../scripts/translateData.js";
 import { useGeolocation } from "../scripts/getPosition.js";
 import { filterWeatherDataByTime } from '../scripts/filterWeatherDataByTime.js'
+//import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
 
 export default {
   data() {
@@ -26,6 +31,9 @@ export default {
       loading: true,
       weatherObjects: []
     };
+  },
+  components: {
+    //ClothesForTheDay
   },
   async created() {
     try {
