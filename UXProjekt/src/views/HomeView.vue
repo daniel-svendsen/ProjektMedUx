@@ -1,7 +1,6 @@
-<!-- HomeView.vue -->
 <template>
   <div>
-    <!-- <ClothesForTheDay /> -->
+    <ClothesForTheDay />
   </div>
   <div>
     <h1 class="title">Specifik väderdata</h1>
@@ -19,11 +18,8 @@
 </template>
 
 <script>
-import { fetchWeatherData } from "../scripts/getWeather.js";
-import { transformWeatherData } from "../scripts/translateData.js";
-import { useGeolocation } from "../scripts/getPosition.js";
-import { filterWeatherDataByTime } from '../scripts/filterWeatherDataByTime.js'
-//import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
+import { getWeatherObjectsList } from "../scripts/getAll.js"; // Importera getWeatherObjectsList från getAll.js
+import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
 
 export default {
   data() {
@@ -33,43 +29,15 @@ export default {
     };
   },
   components: {
-    //ClothesForTheDay
+    ClothesForTheDay
   },
   async created() {
     try {
-      // Call useGeolocation to get latitude and longitude
-      const { latitude, longitude } = await useGeolocation();
-
-      // Fetch weather data using obtained latitude and longitude
-      const weatherData = await fetchWeatherData(latitude, longitude);
-
-      if (!weatherData || !weatherData.timeSeries) {
-        throw new Error('Weather data is missing or has an unexpected structure');
-      }
-
-      // Transform weather data
-      const transformedData = await transformWeatherData(weatherData);
-
-      // Filter weather data by time
-      const filteredData = await filterWeatherDataByTime(transformedData);
-
-      // Convert each entry to an object and push to weatherObjects array
-      filteredData.forEach(entry => {
-        const weatherObj = {
-          date: entry.validTime,
-          //date: new Date(entry.validTime).toLocaleDateString('sv-SE'), // Extrahera datum och formatera det
-          //time: new Date(entry.validTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' }), // Extrahera tid och formatera det
-          averagePrecipitation: entry.parameters.find(param => param.name === 'Genomsnittlig nederbörd').values[0],
-          temperature: entry.parameters.find(param => param.name === 'Temperatur').values[0],
-          windSpeed: entry.parameters.find(param => param.name === 'Vindstyrka').values[0],
-          weatherSymbol: entry.parameters.find(param => param.name === 'Vädersymbol').values[0]
-        };
-        this.weatherObjects.push(weatherObj);
-      });
-
+      // Hämta väderobjekten från getWeatherObjectsList
+      this.weatherObjects = await getWeatherObjectsList();
       this.loading = false;
     } catch (error) {
-      console.error("Error fetching weather data:", error);
+      console.error("Error fetching and transforming weather data:", error);
       this.loading = false;
     }
   }
