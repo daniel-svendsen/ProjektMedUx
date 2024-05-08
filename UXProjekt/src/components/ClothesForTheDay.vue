@@ -8,6 +8,12 @@
             <div v-for="(outfit, index) in outfits.slice(0, 1)" :key="index" class="outfit-item">
                 <!-- Visa kläder för respektive tidpunkt -->
                 <h2>{{ outfit.time }}</h2>
+                <h2>Barn:</h2>
+            <ul>
+                <li v-for="child in children" :key="child.id">
+                    {{ child.name }} ({{ child.age }} år)
+                </li>
+            </ul>
                 <p>Kläder: {{ outfit.clothes }}</p>
             </div>
         </div>
@@ -37,6 +43,7 @@
 
 <script>
 import { filterWeatherDataByTime } from '@/scripts/filterWeatherDataByTime.js'
+import { useUserStore } from '@/stores/userStore';
 
 export default {
     data() {
@@ -44,6 +51,12 @@ export default {
             loading: true,
             outfits: []
         };
+    },
+    computed: {
+        children() {
+            const store = useUserStore();
+            return store.userChildren;
+        }
     },
     async created() {
         try {
