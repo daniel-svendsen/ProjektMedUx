@@ -1,8 +1,8 @@
 <template>
   <div>
+    <!-- Lägg till ClothesForTheDay-komponenten här -->
     <ClothesForTheDay />
-  </div>
-  <div>
+
     <h1 class="title">Specifik väderdata</h1>
     <div v-if="loading">Laddar...</div>
     <div v-else class="weather-container">
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
-import { filterWeatherDataByTime } from "@/scripts/filterWeatherDataByTime";
+import ClothesForTheDay from "../components/ClothesForTheDay.vue";
+import { filterWeatherDataByTime } from "../scripts/filterWeatherDataByTime";
 
 export default {
   data() {

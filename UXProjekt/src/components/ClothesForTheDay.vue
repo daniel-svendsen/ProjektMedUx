@@ -1,11 +1,10 @@
-<!-- ClothesForTheDay.vue -->
 <template>
     <div>
         <h1 class="title">Kläder för dagen</h1>
         <div v-if="loading">Laddar...</div>
         <div v-else>
             <div class="carousel">
-                <div v-for="(outfit, index) in outfits" :key="index" class="outfit-item">
+                <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="outfit-item">
                     <!-- Visa kläder för respektive tidpunkt -->
                     <h2>{{ outfit.time }}</h2>
                     <p>Kläder: {{ outfit.clothes }}</p>
@@ -16,9 +15,9 @@
 </template>
 
 <script>
-import { getWeatherObjectsList } from '@/scripts/getAll.js'; // Importera den nya getAll.js-filen
+import { filterWeatherDataByTime } from '@/scripts/filterWeatherDataByTime.js'
 
-export const ClothesForTheDay = {
+export default {
     data() {
         return {
             loading: true,
@@ -27,11 +26,8 @@ export const ClothesForTheDay = {
     },
     async created() {
         try {
-            const weatherObjects = await getWeatherObjectsList(); // Anropa getWeatherObjectsList för att hämta väderobjekten
-
-            // Skapa klädoutfits för olika tidpunkter baserat på väderobjekten
+            const weatherObjects = await filterWeatherDataByTime();
             this.outfits = this.createOutfits(weatherObjects);
-
             this.loading = false;
         } catch (error) {
             console.error('Error fetching and transforming weather data:', error);

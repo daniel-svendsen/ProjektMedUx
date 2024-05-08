@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import '@fortawesome/fontawesome-free/css/all.css'; // Import Font Awesome styles
-import GetPosition from './components/GetPosition.vue';
 </script>
 
 <template>
@@ -29,7 +28,6 @@ import GetPosition from './components/GetPosition.vue';
             <i class="fas fa-cog"></i> <!-- Settings Icon -->
             Inställningar
           </RouterLink>
-          <GetPosition @position-updated="updatePosition" />
         </nav>
       </div>
     </header>

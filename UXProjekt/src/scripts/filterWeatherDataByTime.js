@@ -10,7 +10,7 @@ export async function filterWeatherDataByTime() {
         const filteredWeatherObjects = weatherObjects.filter(entry => {
             const time = new Date(entry.date); // Assuming date contains the time information
             const hour = time.getUTCHours();
-            return [8, 12, 16, 20].includes(hour);
+            return [6, 10, 14, 18].includes(hour);
         });
 
         return filteredWeatherObjects;
