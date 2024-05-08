@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <ClothesForTheDay /> -->
+    <ClothesForTheDay />
   </div>
   <div>
     <h1 class="title">Specifik väderdata</h1>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-// import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
+import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
 import { filterWeatherDataByTime } from "@/scripts/filterWeatherDataByTime";
 
 export default {
@@ -29,7 +29,7 @@ export default {
     };
   },
   components: {
-    // ClothesForTheDay
+    ClothesForTheDay
   },
   async created() {
     try {
