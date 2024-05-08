@@ -9,11 +9,11 @@
                 <!-- Visa kläder för respektive tidpunkt -->
                 <h2>{{ outfit.time }}</h2>
                 <h2>Barn:</h2>
-            <ul>
-                <li v-for="child in children" :key="child.id">
-                    {{ child.name }} ({{ child.age }} år)
-                </li>
-            </ul>
+                <ul>
+                    <li v-for="child in children" :key="child.id">
+                        {{ child.name }} ({{ child.age }} år)
+                    </li>
+                </ul>
                 <p>Kläder: {{ outfit.clothes }}</p>
             </div>
         </div>
