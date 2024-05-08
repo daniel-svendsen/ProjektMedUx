@@ -1,14 +1,35 @@
 <template>
     <div>
         <h1 class="title">Kläder för dagen</h1>
-        <div v-if="loading">Laddar...</div>
-        <div v-else>
-            <div class="carousel">
-                <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="outfit-item">
-                    <!-- Visa kläder för respektive tidpunkt -->
-                    <h2>{{ outfit.time }}</h2>
-                    <p>Kläder: {{ outfit.clothes }}</p>
-                </div>
+    </div>
+
+    <div class="carousel rounded-box">
+        <div class="carousel-item">
+            <div v-for="(outfit, index) in outfits.slice(0, 1)" :key="index" class="outfit-item">
+                <!-- Visa kläder för respektive tidpunkt -->
+                <h2>{{ outfit.time }}</h2>
+                <p>Kläder: {{ outfit.clothes }}</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div v-for="(outfit, index) in outfits.slice(1, 2)" :key="index" class="outfit-item">
+                <!-- Visa kläder för respektive tidpunkt -->
+                <h2>{{ outfit.time }}</h2>
+                <p>Kläder: {{ outfit.clothes }}</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div v-for="(outfit, index) in outfits.slice(2, 3)" :key="index" class="outfit-item">
+                <!-- Visa kläder för respektive tidpunkt -->
+                <h2>{{ outfit.time }}</h2>
+                <p>Kläder: {{ outfit.clothes }}</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div v-for="(outfit, index) in outfits.slice(3, 4)" :key="index" class="outfit-item">
+                <!-- Visa kläder för respektive tidpunkt -->
+                <h2>{{ outfit.time }}</h2>
+                <p>Kläder: {{ outfit.clothes }}</p>
             </div>
         </div>
     </div>
