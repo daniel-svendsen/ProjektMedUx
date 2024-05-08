@@ -11,15 +11,16 @@
         <p>Genomsnittlig nederbörd: {{ weatherObj.averagePrecipitation }}</p>
         <p>Temperatur: {{ weatherObj.temperature }}</p>
         <p>Vindstyrka: {{ weatherObj.windSpeed }}</p>
-        <p>Vädersymbol: {{ weatherObj.weatherSymbol }}</p>
+        <img :src="weatherObj.weatherSymbol" alt="Vädersymbol">
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
 import { filterWeatherDataByTime } from "@/scripts/filterWeatherDataByTime";
+
+import ClothesForTheDay from "@/components/ClothesForTheDay.vue";
 
 export default {
   data() {
