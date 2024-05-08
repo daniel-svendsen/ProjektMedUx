@@ -28,6 +28,10 @@ import '@fortawesome/fontawesome-free/css/all.css'; // Import Font Awesome style
             <i class="fas fa-cog"></i> <!-- Settings Icon -->
             Inställningar
           </RouterLink>
+<<<<<<< HEAD
+=======
+       
+>>>>>>> 3220a6a71036419f1e7a4139bf08d435c43d0c9b
         </nav>
       </div>
     </header>
