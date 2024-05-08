@@ -1,3 +1,4 @@
+<!-- ClothesForTheDay.vue -->
 <template>
     <div>
         <h1 class="title">Kläder för dagen</h1>

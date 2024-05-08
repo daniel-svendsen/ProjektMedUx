@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ClothesForTheDay />
+    <!-- <ClothesForTheDay /> -->
   </div>
   <div>
     <h1 class="title">Specifik väderdata</h1>
@@ -18,23 +18,23 @@
 </template>
 
 <script>
-import { getWeatherObjectsList } from "../scripts/getAll.js"; // Importera getWeatherObjectsList från getAll.js
-import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
+// import { ClothesForTheDay } from "../components/ClothesForTheDay.vue";
+import { filterWeatherDataByTime } from "@/scripts/filterWeatherDataByTime";
 
 export default {
   data() {
     return {
       loading: true,
-      weatherObjects: []
+      weatherObjects: [] // Corrected variable name
     };
   },
   components: {
-    ClothesForTheDay
+    // ClothesForTheDay
   },
   async created() {
     try {
-      // Hämta väderobjekten från getWeatherObjectsList
-      this.weatherObjects = await getWeatherObjectsList();
+      // Fetch weather data and assign it to weatherObjects
+      this.weatherObjects = await filterWeatherDataByTime();
       this.loading = false;
     } catch (error) {
       console.error("Error fetching and transforming weather data:", error);
