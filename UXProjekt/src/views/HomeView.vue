@@ -3,7 +3,7 @@
     <!-- Lägg till ClothesForTheDay-komponenten här -->
     <ClothesForTheDay />
 
-    <h1 class="title">Specifik väderdata</h1>
+    <!-- <h1 class="title">Specifik väderdata</h1>
     <div v-if="loading">Laddar...</div>
     <div v-else class="weather-container">
       <div v-for="(weatherObj, index) in weatherObjects.slice(0, 4)" :key="index" class="weather-entry">
@@ -13,7 +13,7 @@
         <p>Vindstyrka: {{ weatherObj.windSpeed }}</p>
         <img :src="weatherObj.weatherSymbol" alt="Vädersymbol">
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -44,20 +44,4 @@ export default {
 };
 </script>
 
-<style>
-/* Anpassar layouten för väderdatan */
-.weather-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/* Justerar storleken på varje väderpost */
-.weather-entry {
-  width: calc(25% - 20px);
-  /* Bredden för varje post */
-  margin-bottom: 20px;
-  /* Avstånd mellan varje post */
-  font-size: 10px;
-}
-</style>
+<style></style>
