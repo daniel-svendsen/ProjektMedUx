@@ -151,7 +151,7 @@ export default {
     /* Bredden på klädplagget */
     height: auto;
     /* Låt höjden justeras automatiskt för att behålla proportionerna */
-    margin: 5px;
+    margin: 2px;
     /* Justera marginaler för att separera klädesplagg */
 }
 
@@ -163,9 +163,10 @@ export default {
     /* Placera sneakers längst ner */
 }
 
-.clothing img[src$='långbyxor.png'] {
+.clothing img[src$='långbyxor.png'],
+.clothing img[src$='shorts.png'] {
     order: 2;
-    height: 50px;
+    height: 15%;
     /* Placera långbyxor över sneakers */
 }
 
@@ -174,8 +175,7 @@ export default {
 .clothing img[src$='t-shirt.png'],
 .clothing img[src$='paraply.png'] {
     order: 3;
-    height: 50px;
-    width: 50px;
+    height: 25%;
     /* Placera jacka/tröja och paraply bredvid varandra */
 }
 
