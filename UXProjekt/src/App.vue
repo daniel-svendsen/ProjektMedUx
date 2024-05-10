@@ -10,7 +10,7 @@ import homeIcon from '@/assets/Ikonerstilarlogo/home-icon-white.svg';
 import packingIcon from '@/assets/Ikonerstilarlogo/packing-white.svg';
 import noticesIcon from '@/assets/Ikonerstilarlogo/notice-white.svg';
 import settingsIcon from '@/assets/Ikonerstilarlogo/settings-white.svg';
-import '@fortawesome/fontawesome-free/css/all.css';
+import oversightIcon from '@/assets/Ikonerstilarlogo/weather-white.svg';
 
 const latitude = ref(null);
 const longitude = ref(null);
@@ -62,7 +62,7 @@ onMounted(async () => {
             <span>Packning</span>
           </RouterLink>
           <RouterLink to="/oversight" class="flex items-center">
-            <i class="fas fa-chart-pie mr-2"></i> <!-- Oversight Icon -->
+            <img :src="oversightIcon" alt="Packing Icon" class="mr-2">
             <span>Översikt</span>
           </RouterLink>
           <RouterLink to="/notices" class="flex items-center">

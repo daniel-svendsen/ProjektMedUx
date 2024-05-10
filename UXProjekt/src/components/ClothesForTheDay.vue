@@ -140,6 +140,12 @@ export default {
 
 <style>
 /* Stilmall för karusell och klädoutfits */
+/* #carousel rounded-box {
+    height: 50%;
+} */
+#carousel-item {
+    height: 5px;
+}
 
 .outfit-item {
     display: flex;
@@ -149,7 +155,7 @@ export default {
 .clothing-item {
     width: 100px;
     /* Bredden på klädplagget */
-    height: auto;
+    height: 50%;
     /* Låt höjden justeras automatiskt för att behålla proportionerna */
     margin: 2px;
     /* Justera marginaler för att separera klädesplagg */
