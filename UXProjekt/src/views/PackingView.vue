@@ -26,13 +26,6 @@ export default {
 </script>
 
 <style>
-@media (min-width: 1024px) {
-  .packing {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column; /* Om du vill centrera innehållet vertikalt */
-  }
-}
+
 </style>
 

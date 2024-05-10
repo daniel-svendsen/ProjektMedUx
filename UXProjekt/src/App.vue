@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import '@fortawesome/fontawesome-free/css/all.css'; // Import Font Awesome styles
+ // Import Font Awesome styles
 </script>
 
 <template>

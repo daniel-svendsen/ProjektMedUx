@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import createprofile from '../views/CreateProfile.vue'
 import home from '../views/HomeView.vue'
 import packing from '../views/PackingView.vue'
 import oversight from '../views/OversightView.vue'
@@ -6,6 +7,11 @@ import notices from '../views/NoticeView.vue'
 import settings from '../views/SettingsView.vue'
 
 const routes = [
+  {
+    path: '/createprofile',
+    name: 'Create Profile',
+    component: createprofile
+  },
   {
     path: '/',
     name: 'Home',

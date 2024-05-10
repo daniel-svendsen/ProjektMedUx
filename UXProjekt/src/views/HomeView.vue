@@ -46,18 +46,4 @@ export default {
 
 <style>
 /* Anpassar layouten för väderdatan */
-.weather-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/* Justerar storleken på varje väderpost */
-.weather-entry {
-  width: calc(25% - 20px);
-  /* Bredden för varje post */
-  margin-bottom: 20px;
-  /* Avstånd mellan varje post */
-  font-size: 10px;
-}
 </style>
