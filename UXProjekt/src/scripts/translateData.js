@@ -76,8 +76,8 @@ export function transformWeatherData(weatherData) {
             switch (param.name) {
                 case 'Wsymb2':
                     // Generera URL för vädersymbolen
-                    iconUrl = `https://www.smhi.se/polopoly_fs/1.27958.1518507527!/image/${transformedValue}.png_gen/derivatives/Original_259px/image/${transformedValue}.png`;
-                    transformedValue = iconUrl;  // Använd URL istället för text
+                    // iconUrl = `https://www.smhi.se/polopoly_fs/1.27958.1518507527!/image/${transformedValue}.png_gen/derivatives/Original_259px/image/${transformedValue}.png`;
+                    // transformedValue = iconUrl;  // Använd URL istället för text
                     break;
                 case 't':
                     param.unit = '°C'; // Add the temperature unit

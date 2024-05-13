@@ -4,45 +4,15 @@
     </div>
 
     <div class="carousel rounded-box">
-        <div class="carousel-item">
-            <div v-for="(outfit, index) in outfits.slice(0, 1)" :key="index" class="outfit-item">
-                <h2>{{ outfit.time }}</h2>
-                <h2>Barn:</h2>
-                <ul>
-                    <li v-for="child in children" :key="child.id">
-                        {{ child.name }} ({{ child.age }} år)
-                    </li>
-                </ul>
-                <div class="clothing">
-                    <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
-                        :alt="getAltText(clothing)">
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div v-for="(outfit, index) in outfits.slice(1, 2)" :key="index" class="outfit-item">
-                <h2>{{ outfit.time }}</h2>
-                <div class="clothing">
-                    <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
-                        :alt="getAltText(clothing)">
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div v-for="(outfit, index) in outfits.slice(2, 3)" :key="index" class="outfit-item">
-                <h2>{{ outfit.time }}</h2>
-                <div class="clothing">
-                    <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
-                        :alt="getAltText(clothing)">
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div v-for="(outfit, index) in outfits.slice(3, 4)" :key="index" class="outfit-item">
-                <h2>{{ outfit.time }}</h2>
-                <div class="clothing">
-                    <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
-                        :alt="getAltText(clothing)">
+        <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item">
+            <div :style="getWeatherBackground(outfit.weatherSymbol)" class="weather-gif">
+                <div class="outfit-item">
+                    <h2>{{ outfit.time }}</h2>
+                    <div class="clothing">
+                        <br>
+                        <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
+                            :alt="getAltText(clothing)">
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,8 +20,9 @@
 </template>
 
 <script>
-import { filterWeatherDataByTime } from '@/scripts/filterWeatherDataByTime.js'
+import { filterWeatherDataByTime } from '@/scripts/filterWeatherDataByTime.js';
 import { useUserStore } from '@/stores/userStore';
+import { decideGif } from '@/scripts/decideGif.js';
 
 // Importera bilderna
 import vinterjacka from '@/assets/Barnkläder/vinterjacka.png';
@@ -66,8 +37,8 @@ import sneakers from '@/assets/Barnkläder/sneakers.png';
 import tshirt from '@/assets/Barnkläder/t-shirt.png';
 import shorts from '@/assets/Barnkläder/shorts.png';
 import sandaler from '@/assets/Barnkläder/sandaler.png';
-import keps from '@/assets/Barnkläder/keps.png';
-import solglasögon from '@/assets/Barnkläder/solglasögon.png';
+import keps from '@/assets/Barnkläder/cap.png';
+import solglasögon from '@/assets/Barnkläder/sunglass.png';
 import regnjacka from '@/assets/Barnkläder/Regnjacka.png';
 import regnbyxor from '@/assets/Barnkläder/regnbyxor.png';
 import stövlar from '@/assets/Barnkläder/stövlar.png';
@@ -106,28 +77,31 @@ export default {
                 const rain = weatherObj.averagePrecipitation;
 
                 if (temperature <= 5) {
-                    clothes.push(vinterjacka, mössa, halsduk, vantehöger, vantevänster, kängor);
+                    clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
                 } else if (temperature <= 15) {
                     clothes.push(keps, vårjacka, långbyxor, sneakers);
                 } else {
-                    clothes.push(tshirt, shorts, sandaler, keps, solglasögon);
+                    clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
                 }
 
                 if (rain > 0 && rain < 1) {
-                    clothes.push("Tänk på att det kan regna, så ta med paraply!")
-                    //clothes.push(regnjacka, regnbyxor, stövlar, paraply);
+                    clothes.push(paraply);
                 }
                 if (rain > 1 && rain < 5) {
-                    clothes.push("Du kanske borde överväga att ta på dig regnkläder!")
-                    //clothes.push(regnjacka, regnbyxor, stövlar, paraply);
+                    clothes.push(regnjacka, regnbyxor, stövlar, paraply);
                 }
 
                 if (temperature > 0 && windSpeed >= 8) {
                     clothes.push(vindjacka, långbyxor);
                 }
 
-                return { time: weatherObj.date, clothes };
+                return { time: weatherObj.date, clothes, weatherSymbol: weatherObj.weatherSymbol };
             });
+        },
+        getWeatherBackground(weatherSymbol) {
+            return {
+                backgroundImage: `url(${decideGif(weatherSymbol)})`
+            };
         },
         getAltText(imagePath) {
             const filename = imagePath.split('/').pop();
@@ -139,61 +113,36 @@ export default {
 </script>
 
 <style>
-/* Stilmall för karusell och klädoutfits */
-/* #carousel rounded-box {
-    height: 50%;
-} */
-#carousel-item {
-    height: 5px;
+.carousel-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-left: -200px; */
+    /* Justerbar margin här */
+}
+
+.carousel {
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .outfit-item {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-.clothing-item {
-    width: 100px;
-    /* Bredden på klädplagget */
-    height: 50%;
-    /* Låt höjden justeras automatiskt för att behålla proportionerna */
-    margin: 2px;
-    /* Justera marginaler för att separera klädesplagg */
+.clothing img {
+    height: 120px;
 }
 
-/* Anpassa ordning och placering för olika klädesplagg */
-.clothing img[src$='sneakers.png'],
-.clothing img[src$='kängor.png'] {
-    order: 1;
+.weather-gif {
+    position: relative;
+    width: 10%;
     height: 10%;
-    /* Placera sneakers längst ner */
-}
-
-.clothing img[src$='långbyxor.png'],
-.clothing img[src$='shorts.png'] {
-    order: 2;
-    height: 15%;
-    /* Placera långbyxor över sneakers */
-}
-
-.clothing img[src$='vinterjacka.png'],
-.clothing img[src$='vårjacka.png'],
-.clothing img[src$='t-shirt.png'],
-.clothing img[src$='paraply.png'] {
-    order: 3;
-    height: 25%;
-    /* Placera jacka/tröja och paraply bredvid varandra */
-}
-
-.clothing img[src$='solglasögon.png'] {
-    order: 4;
-    /* Placera solglasögon över jacka/tröja */
-}
-
-.clothing img[src$='keps.png'],
-.clothing img[src$='mössa.png'] {
-    order: 5;
-    /* Placera keps/mössa längst upp */
-    height: 5%;
+    background-size: cover;
+    background-position: center;
 }
 </style>
