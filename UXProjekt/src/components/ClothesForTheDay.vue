@@ -1,23 +1,22 @@
 <template>
     <div>
-        <h1 class="title">Kläder för dagen</h1>
-    </div>
-
-    <div class="carousel rounded-box">
-        <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item">
-            <div :style="getWeatherBackground(outfit.weatherSymbol)" class="weather-gif">
-                <div class="outfit-item">
-                    <h2>{{ outfit.time }}</h2>
-                    <div class="clothing">
-                        <br>
-                        <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
-                            :alt="getAltText(clothing)">
+        <div class="carousel rounded-box">
+            <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item">
+                <div :style="getWeatherBackground(outfit.weatherSymbol)" class="weather-gif">
+                    <div class="outfit-item"> <!-- Flytta klassen weather-gif hit -->
+                        <h2>{{ outfit.time }}</h2>
+                        <div class="clothing">
+                            <br>
+                            <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
+                                :alt="getAltText(clothing)">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 
 <script>
 import { filterWeatherDataByTime } from '@/scripts/filterWeatherDataByTime.js';
@@ -135,14 +134,15 @@ export default {
 }
 
 .clothing img {
-    height: 120px;
+    height: 110px;
 }
 
 .weather-gif {
     position: relative;
-    width: 10%;
-    height: 10%;
-    background-size: cover;
-    background-position: center;
+    width: 48%;
+    height: 30%;
+    background-size: contain;
+    background-position: absolute;
+    justify-content: center;
 }
 </style>

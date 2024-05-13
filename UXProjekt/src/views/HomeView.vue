@@ -1,7 +1,10 @@
 <template>
   <div>
-    <!-- Lägg till ClothesForTheDay-komponenten här -->
     <ClothesForTheDay />
+  </div>
+  <div>
+    <!-- Lägg till ClothesForTheDay-komponenten här -->
+
 
     <!-- <h1 class="title">Specifik väderdata</h1>
     <div v-if="loading">Laddar...</div>
