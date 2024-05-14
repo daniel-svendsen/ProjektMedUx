@@ -1,25 +1,28 @@
+<!-- PackingView.vue -->
 <template>
   <div class="packing">
     <h1>This is a packing page</h1>
     <!-- Lägg till sökfältet här -->
-    <SearchLocation />
+    <!-- <SearchLocation /> -->
+  </div>
+  <div>
+    <!-- Använd ClothesForPacking-komponenten här -->
+    <ClothesForPacking />
   </div>
 </template>
 
 <script>
 // Importera dina andra skript som behövs
-import { fetchWeatherData } from "../scripts/getWeather.js";
-import { transformWeatherData } from "../scripts/translateData.js";
-import { useNominatimSearch } from "../scripts/useNominatimSearch.js";
-import { filterWeatherDataByTime } from '../scripts/filterWeatherDataByTime.js'
+import ClothesForPacking from "@/components/ClothesForPacking.vue";
 
 // Importera SearchLocation komponenten
-import SearchLocation from "@/components/SearchLocation.vue";
+//import SearchLocation from "@/components/SearchLocation.vue";
 
 export default {
   components: {
     // Registrera SearchLocation komponenten
-    SearchLocation
+    //SearchLocation,
+    ClothesForPacking
   },
   // Dina andra optioner och metoder
 }
@@ -31,8 +34,8 @@ export default {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    flex-direction: column; /* Om du vill centrera innehållet vertikalt */
+    flex-direction: column;
+    /* Om du vill centrera innehållet vertikalt */
   }
 }
 </style>
-

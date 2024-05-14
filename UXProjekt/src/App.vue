@@ -55,23 +55,23 @@ onMounted(async () => {
         <div class="wrapper flex justify-between items-center text-white">
           <RouterLink to="/" class="flex items-center">
             <img :src="homeIcon" alt="Home Icon" class="mr-2">
-            <span>Hem</span>
+            <!-- <span>Hem</span> -->
           </RouterLink>
           <RouterLink to="/packing" class="flex items-center">
             <img :src="packingIcon" alt="Packing Icon" class="mr-2">
-            <span>Packning</span>
+            <!-- <span>Packning</span> -->
           </RouterLink>
           <RouterLink to="/oversight" class="flex items-center">
             <img :src="oversightIcon" alt="Packing Icon" class="mr-2">
-            <span>Översikt</span>
+            <!-- <span>Översikt</span> -->
           </RouterLink>
           <RouterLink to="/notices" class="flex items-center">
             <img :src="noticesIcon" alt="Notices Icon" class="mr-2">
-            <span>Notiser</span>
+            <!-- <span>Notiser</span> -->
           </RouterLink>
           <RouterLink to="/settings" class="flex items-center">
             <img :src="settingsIcon" alt="Settings Icon" class="mr-2">
-            <span>Inställningar</span>
+            <!-- <span>Inställningar</span> -->
           </RouterLink>
         </div>
       </footer>

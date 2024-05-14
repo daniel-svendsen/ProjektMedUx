@@ -1,5 +1,14 @@
 <template>
     <div>
+        <form @submit.prevent="generateOutfits">
+            <label>Temperatur (°C):</label>
+            <input type="number" v-model="temperature" min="-10" max="30" step="1">
+            <label>Vindhastighet (m/s):</label>
+            <input type="number" v-model="windSpeed" min="0" max="20" step="1">
+            <label>Nederbörd (mm):</label>
+            <input type="number" v-model="precipitation" min="0" max="10" step="0.1">
+            <button type="submit">Generera klädkombinationer</button>
+        </form>
         <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
                 :style="getOutfitBackground(outfit.weatherSymbol)" @click="togglePopup(outfit)">
@@ -13,18 +22,21 @@
                         </div>
                     </div>
                 </div>
+                <!-- Popupruta -->
+                <div v-if="popupVisible" class="popup-overlay">
+                    <div class="popup-content">
+                        <h3>Rekommenderade kläder</h3>
+                        <ul>
+                            <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing)
+                                }}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
 
-        <!-- Popupruta -->
-        <div v-if="popupVisible" class="popup-overlay">
-            <div class="popup-content">
-                <h3>Rekommenderade kläder</h3>
-                <ul>
-                    <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing) }}</li>
-                </ul>
-            </div>
-        </div>
+
     </div>
 </template>
 
@@ -81,6 +93,16 @@ export default {
         }
     },
     methods: {
+        nextOutfit() {
+            if (this.currentOutfitIndex < this.outfits.length - 1) {
+                this.currentOutfitIndex++;
+            }
+        },
+        prevOutfit() {
+            if (this.currentOutfitIndex > 0) {
+                this.currentOutfitIndex--;
+            }
+        },
         createOutfits(weatherObjects) {
             return weatherObjects.map(weatherObj => {
                 let clothes = [];
@@ -125,18 +147,53 @@ export default {
         togglePopup(outfit) {
             this.selectedOutfit = outfit;
             this.popupVisible = !this.popupVisible;
+        },
+        generateOutfits() {
+            // Återställ outfits-arrayen innan nya klädkombinationer genereras
+            this.outfits = [];
+
+            // Skapa en klädkombination baserat på användarens inmatning
+            let clothes = [];
+            if (this.temperature <= 5) {
+                clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
+            } else if (this.temperature <= 15) {
+                clothes.push(keps, vårjacka, långbyxor, sneakers);
+            } else {
+                clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
+            }
+
+            if (this.precipitation > 0 && this.precipitation < 2) {
+                clothes.push(paraply);
+            }
+            if (this.precipitation > 1 && this.precipitation < 5) {
+                clothes.push(regnjacka, regnbyxor, stövlar, paraply);
+            }
+
+            if (this.temperature > 0 && this.windSpeed >= 8) {
+                clothes.push(vindjacka, långbyxor);
+            }
+
+            // Skapa ett objekt som representerar klädkombinationen och lägg till det i outfits-arrayen
+            const outfit = {
+                time: new Date(), // Använda tiden för genereringen av klädkombinationen
+                clothes: clothes,
+                weatherSymbol: 'custom' // Använd en symbol som representerar manuellt inställt väder
+            };
+            this.outfits.push(outfit);
         }
     }
 };
 </script>
 
 <style>
+/* Base styles */
 .carousel-item {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 90px;
+    margin-right: 70%;
+    /* Adjust margin for mobile */
 }
 
 .carousel {
@@ -159,13 +216,60 @@ export default {
 
 .weather-gif {
     position: relative;
-    width: 48%;
+    width: 40%;
     height: 30%;
     justify-content: center;
-    margin-left: 200px;
+    margin-left: 190px;
+    /* Adjust margin for mobile */
 }
 
-.popup-content {
+.popup-overlay {
     background-color: #F2A42D;
+    position: absolute;
+    bottom: 0;
+    /* Placera längst ner */
+    left: 0;
+    /* Justera till vänster */
+    width: 100%;
+    /* Bredden ska täcka hela karusellen */
+}
+
+/* Media queries for mobile responsiveness */
+@media only screen and (max-width: 768px) {
+    .carousel-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 10px;
+        /* Adjust margin for mobile */
+    }
+
+    .carousel {
+        position: relative;
+        display: flex;
+        justify-content: left;
+        margin-bottom: 20px;
+    }
+
+    .outfit-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .clothing img {
+        min-width: auto;
+        height: 110px;
+    }
+
+    .weather-gif {
+        position: relative;
+        width: 48%;
+        height: 30%;
+        justify-content: center;
+        margin-left: 10px;
+        /* Adjust margin for mobile */
+    }
 }
 </style>

@@ -1,3 +1,4 @@
+<!-- HomeView.vue -->
 <template>
   <div>
     <ClothesForTheDay />
