@@ -2,7 +2,7 @@
     <div>
         <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
-                :style="getOutfitBackground(outfit.weatherSymbol)">
+                :style="getOutfitBackground(outfit.weatherSymbol)" @click="togglePopup(outfit)">
                 <div class="weather-gif">
                     <div class="outfit-item">
                         <h2>{{ outfit.time }}</h2>
@@ -13,6 +13,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Popupruta -->
+        <div v-if="popupVisible" class="popup-overlay">
+            <div class="popup-content">
+                <h3>Rekommenderade kläder</h3>
+                <ul>
+                    <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing) }}</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -31,25 +41,27 @@ import halsduk from '@/assets/Barnkläder/halsduk.png';
 import vantehöger from '@/assets/Barnkläder/vante höger.png';
 import vantevänster from '@/assets/Barnkläder/vante vänster.png';
 import kängor from '@/assets/Barnkläder/kängor.png';
-import vårjacka from '@/assets/Barnkläder/vårjacka.png';
-import långbyxor from '@/assets/Barnkläder/långbyxor.png';
+import vårjacka from '@/assets/Barnkläder/Vårjacka.png';
+import långbyxor from '@/assets/Barnkläder/Långbyxor.png';
 import sneakers from '@/assets/Barnkläder/sneakers.png';
-import tshirt from '@/assets/Barnkläder/t-shirt.png';
-import shorts from '@/assets/Barnkläder/shorts.png';
-import sandaler from '@/assets/Barnkläder/sandaler.png';
-import keps from '@/assets/Barnkläder/cap.png';
-import solglasögon from '@/assets/Barnkläder/sunglass.png';
+import tshirt from '@/assets/Barnkläder/T-shirt.png';
+import shorts from '@/assets/Barnkläder/Shorts.png';
+import sandaler from '@/assets/Barnkläder/Sandaler.png';
+import keps from '@/assets/Barnkläder/Keps.png';
+import solglasögon from '@/assets/Barnkläder/Solglasögon.png';
 import regnjacka from '@/assets/Barnkläder/Regnjacka.png';
 import regnbyxor from '@/assets/Barnkläder/regnbyxor.png';
 import stövlar from '@/assets/Barnkläder/stövlar.png';
-import paraply from '@/assets/Barnkläder/paraply.png';
+import paraply from '@/assets/Barnkläder/Paraply.png';
 import vindjacka from '@/assets/Barnkläder/vindjacka.png';
 
 export default {
     data() {
         return {
             loading: true,
-            outfits: []
+            outfits: [],
+            popupVisible: false,
+            selectedOutfit: null
         };
     },
     computed: {
@@ -109,6 +121,10 @@ export default {
             const filename = imagePath.split('/').pop();
             const altText = filename.split('.')[0];
             return altText;
+        },
+        togglePopup(outfit) {
+            this.selectedOutfit = outfit;
+            this.popupVisible = !this.popupVisible;
         }
     }
 };
@@ -147,5 +163,9 @@ export default {
     height: 30%;
     justify-content: center;
     margin-left: 200px;
+}
+
+.popup-content {
+    background-color: #F2A42D;
 }
 </style>
