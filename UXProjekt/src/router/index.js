@@ -10,32 +10,44 @@ const routes = [
   {
     path: '/createprofile',
     name: 'Create Profile',
-    component: createprofile
+    component: createprofile,
+    meta: { showFooter: false }
+  },
+  {
+    path: '/addchild',
+    name: 'Add Child',
+    component: addchild,
+    meta: { showFooter: false }
   },
   {
     path: '/',
     name: 'Home',
-    component: home
+    component: home,
+    meta: { showFooter: true }
   },
   {
     path: '/packing',
     name: 'Packing',
-    component: packing
+    component: packing,
+    meta: { showFooter: true }
   },
   {
     path: '/oversight',
     name: 'Oversight',
-    component: oversight
+    component: oversight,
+    meta: { showFooter: true }
   },
   {
     path: '/notices',
     name: 'Notices',
-    component: notices
+    component: notices,
+    meta: { showFooter: true }
   },
   {
     path: '/settings',
     name: 'Settings',
-    component: settings
+    component: settings,
+    meta: { showFooter: true }
   }
 ]
 

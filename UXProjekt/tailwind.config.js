@@ -17,8 +17,8 @@ export default {
       colors: {
         'info-bg': '#D9D9D9',
         'view-bg': '#f4f4f8',
-        'orange': '#f2a32d'
-        'white' : '#f8f8f8'
+        'orange': '#f2a32d',
+        'white': '#f8f8f8'
       }
     },
   },
