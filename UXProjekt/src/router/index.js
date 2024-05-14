@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import createprofile from '../views/CreateProfile.vue'
+import addchild from '../views/AddChild.vue'
 import home from '../views/HomeView.vue'
 import packing from '../views/PackingView.vue'
 import oversight from '../views/OversightView.vue'
 import notices from '../views/NoticeView.vue'
 import settings from '../views/SettingsView.vue'
+import settingsprofile from '../views/SettingsViewProfile.vue'
+import settingsabout from '../views/SettingsViewAbout.vue'
 
 const routes = [
   {
@@ -47,6 +50,18 @@ const routes = [
     path: '/settings',
     name: 'Settings',
     component: settings,
+    meta: { showFooter: true }
+  },
+  {
+    path: '/settingsprofile',
+    name: 'Settings Profile',
+    component: settingsprofile,
+    meta: { showFooter: true }
+  },
+  {
+    path: '/settingsabout',
+    name: 'Settings About',
+    component: settingsabout,
     meta: { showFooter: true }
   }
 ]

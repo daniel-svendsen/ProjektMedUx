@@ -1,43 +1,36 @@
 <template>
-  <div>
-    <h1>Inställningar</h1>
-    <!-- Användarhantering -->
-    <user-management></user-management>
-    <!-- Endast visa barnhantering om en användare är vald -->
-    <div v-if="currentUser">
-      <child-management></child-management>
+  <div class="p-4 bg-view-bg">
+    <h1 class="font-headline text-headline1 text-center mt-4">Inställningar</h1>
+
+    <div class="form-control pl-6 mt-10 flex justify-start">
+      <RouterLink to="/settingsprofile" class="flex items-center">
+        <img src="@/assets/Ikonerstilarlogo/settings-profile-icon.svg" alt="profile icon" class="mt-4 w-7 h-7 mr-4">
+        <span class="label-text font-headline text-headline2 mt-3">Profil</span>
+      </RouterLink>
+      <hr class="border-t border-gray-300 mx-0 w-64 my-2">
     </div>
-    <!-- Användarväxlare -->
-    <user-switcher @userChanged="handleUserChange"></user-switcher>
+ 
+    <div class="form-control pl-6 mt-4 flex justify-start">
+      <RouterLink to="/" class="flex items-center">
+        <img src="@/assets/Ikonerstilarlogo/settings-help-icon.svg" alt="profile icon" class="mt-4 w-7 h-7 mr-4">
+        <span class="label-text font-headline text-headline2 mt-3">Hjälp och support</span>
+      </RouterLink>
+      <hr class="border-t border-gray-300 mx-0 w-64 my-2">
+    </div>
+
+    <div class="form-control pl-6 mt-4 flex justify-start">
+      <RouterLink to="/settingsabout" class="flex items-center">
+        <img src="@/assets/Ikonerstilarlogo/settings-info-icon.svg" alt="profile icon" class="mt-4 w-7 h-7 mr-4">
+        <span class="label-text font-headline text-headline2 mt-3">Om</span>
+      </RouterLink>
+      <hr class="border-t border-gray-300 mx-0 w-64 my-2">
+    </div>
   </div>
 </template>
 
-<script>
-import UserManagement from '@/components/user/UserManagement.vue';
-import ChildManagement from '@/components/user/ChildManagement.vue';
-import UserSwitcher from '@/components/user/UserSwitcher.vue';
-import { useUserStore } from '@/stores/userStore';
 
-export default {
-  components: {
-    UserManagement,
-    ChildManagement,
-    UserSwitcher
-  },
-  computed: {
-    currentUser() {
-      const store = useUserStore();
-      return store.currentUser;
-    }
-  },
-  methods: {
-    handleUserChange() {
-      // Uppdaterar vyn när en ny användare väljs, kan inkludera logik för att rensa/formatera vyn
-      this.$forceUpdate(); // Ett enkelt sätt att tvinga en om-rendering, om nödvändigt
-    }
-  }
-}
+<script>
 </script>
 
-<style>
+<style scoped>
 </style>

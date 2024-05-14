@@ -29,18 +29,21 @@
         </div>
 
         <div class="form-control mt-4 flex justify-start">
-            <span class="label-text font-headline text-headline2 mt-2">Lägg till barn</span>
-            <img src="@/assets/Ikonerstilarlogo/icons8_plus.svg" alt="Lägg till"
-                class="cursor-pointer w-16 h-16 flex-shrink-0 mt-2" @click="addUser">
+            <span
+                :class="['label-text font-headline text-headline2 mt-2 cursor-pointer', isFormValid ? 'text-black' : 'text-gray-400']"
+                @click="addUser">
+                Lägg till barn
+                <img src="@/assets/Ikonerstilarlogo/icons8_plus.svg" alt="Lägg till"
+                    :class="['w-16 h-16 flex-shrink-0 mt-2', isFormValid ? 'opacity-100' : 'opacity-30']">
+            </span>
         </div>
     </div>
 </template>
 
 <script lang="js">
 import { useUserStore } from '@/stores/userStore'; // Importera din store
-import { defineComponent } from 'vue';
 
-export default defineComponent({
+export default {
     name: "SkapaProfil",
     data() {
         return {
@@ -57,20 +60,30 @@ export default defineComponent({
         users() {
             const store = useUserStore();
             return store.users;
+        },
+        isFormValid() {
+            return this.newUser.name.trim().length > 0 &&
+                /^\d+$/.test(this.newUser.phone) &&
+                /@.+/.test(this.newUser.email);
         }
     },
     methods: {
-        addUser() {
-            const store = useUserStore();
-            store.addUser({ ...this.newUser, id: Date.now() });
-            this.newUser = { id: Date.now(), name: '', email: '', phone: '', children: [] };
-        },
-        removeUser(id) {
-            const store = useUserStore();
-            store.removeUser(id);
+    addUser() {
+        if (!this.isFormValid) return;
+
+        const store = useUserStore();
+        try {
+            let newUserWithId = { ...this.newUser, id: Date.now() };  // Skapar en ny användare med ett unikt ID
+            store.addUser(newUserWithId);
+            store.setCurrentUser(newUserWithId.id);  // Skicka ID till setCurrentUser
+            this.$router.push('/addchild');  // Navigera efter framgångsrik tilläggning
+        } catch (error) {
+            console.error("Det gick inte att lägga till användaren", error);
         }
-    }
-})
+    },
+}
+
+}
 </script>
 
 <style>
