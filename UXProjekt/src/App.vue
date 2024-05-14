@@ -90,6 +90,7 @@ header,
 footer {
   background-color: #425890;
   width: 100%;
+  margin-bottom: auto;
   /* Bredden är 100% av förälderelementet */
 }
 

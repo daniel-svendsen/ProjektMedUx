@@ -1,9 +1,10 @@
 <template>
     <div>
         <div class="carousel rounded-box">
-            <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item">
-                <div :style="getWeatherBackground(outfit.weatherSymbol)" class="weather-gif">
-                    <div class="outfit-item"> <!-- Flytta klassen weather-gif hit -->
+            <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
+                :style="getOutfitBackground(outfit.weatherSymbol)">
+                <div class="weather-gif">
+                    <div class="outfit-item">
                         <h2>{{ outfit.time }}</h2>
                         <div class="clothing">
                             <br>
@@ -97,9 +98,11 @@ export default {
                 return { time: weatherObj.date, clothes, weatherSymbol: weatherObj.weatherSymbol };
             });
         },
-        getWeatherBackground(weatherSymbol) {
+        getOutfitBackground(weatherSymbol) {
             return {
-                backgroundImage: `url(${decideGif(weatherSymbol)})`
+                backgroundImage: `url(${decideGif(weatherSymbol)})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
             };
         },
         getAltText(imagePath) {
@@ -117,14 +120,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-left: -200px; */
-    /* Justerbar margin här */
+    margin-right: 90px;
 }
 
 .carousel {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    margin-bottom: 20px;
 }
 
 .outfit-item {
@@ -134,6 +137,7 @@ export default {
 }
 
 .clothing img {
+    min-width: auto;
     height: 110px;
 }
 
@@ -141,8 +145,7 @@ export default {
     position: relative;
     width: 48%;
     height: 30%;
-    background-size: contain;
-    background-position: absolute;
     justify-content: center;
+    margin-left: 200px;
 }
 </style>
