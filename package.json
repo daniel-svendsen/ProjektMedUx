@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pinia": "^2.1.7",
+    "vue-demi": "^0.14.7"
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-view-bg">
+  <div class="bg-view-bg">
     <h1 class="font-headline text-headline1 text-center mt-4">Inställningar</h1>
 
     <div class="form-control pl-6 mt-10 flex justify-start">
