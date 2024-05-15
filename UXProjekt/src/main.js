@@ -21,7 +21,7 @@ userStore.fetchUsers();
 
 if (!userStore.users.length) {
     // Om ingen användare finns, navigera till SettingsView
-    router.push({ name: 'Settings' });
+    router.push({ name: 'Create Profile' });
 } else {
     // Om användare finns, navigera till HomeView
     router.push({ name: 'Home' });

@@ -48,4 +48,7 @@ export default {
 };
 </script>
 
-<style></style>
+=======
+<style>
+/* Anpassar layouten för väderdatan */
+</style>

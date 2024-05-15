@@ -5,21 +5,28 @@ export default {
     extend: {
       fontFamily: {
         'headline': ['Montserrat', 'sans-serif'], // Använd Montserrat för rubriker
-        'sans': ['Inter', 'sans-serif'], // Använd Inter som standard sans-serif font
+
+        'sans': ['Inter', 'sans-serif'] // Använd Inter som standard sans-serif font
       },
       fontSize: {
-        'headline1': '24px',
-        'headline2': '20px',
+        'headline1': '24px', 
+        'headline2': '20px', 
         'large-text': '16px',
-        'small-text': '12px',
-        'footnote-text': '12px',
+        'small-text': '12px'
+      },
+      fontWeight: {
+        'headline2': '200' // Definiera vikt specifikt för denna användning
       },
       colors: {
         'info-bg': '#D9D9D9',
-        'view-bg': '#F4F4F8',
-        'orange': '#F2A32D'
+        'view-bg': '#f4f4f8',
+        'orange': '#f2a32d',
+        'white': '#f8f8f8',
+        'blue': '#425890',
+        'grey': '#919193'
       }
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui")]
 }
+

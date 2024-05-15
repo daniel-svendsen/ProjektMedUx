@@ -1,11 +1,10 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'; // Importera ref från vue-paketet
 import { onMounted } from 'vue'; // Importera onMounted från vue-paketet
 import { useGeolocation } from '@/scripts/getPosition.js';
-import { getWeatherObjectsList } from './scripts/getAll.js'; // Importera getWeatherObjectsList
+import { getWeatherObjectsList } from '@/scripts/getAll.js'; // Importera getWeatherObjectsList
 
-// Importera dina ikoner här
 import homeIcon from '@/assets/Ikonerstilarlogo/home-icon-white.svg';
 import packingIcon from '@/assets/Ikonerstilarlogo/packing-white.svg';
 import noticesIcon from '@/assets/Ikonerstilarlogo/notice-white.svg';
@@ -36,67 +35,49 @@ onMounted(async () => {
 
 <template>
   <Suspense>
-    <div>
-      <header class="bg-blue-900 py-4">
-        <div class="wrapper flex justify-between items-center">
-          <div class="flex items-center">
-            <RouterLink to="/" class="flex items-center">
-              <img :src="homeIcon" alt="Home Icon" class="mr-2">
-            </RouterLink>
-          </div>
-          <div class="text-white">Aktuell plats: {{ latitude }} - {{ longitude }}</div>
-          <div class="text-white">{{ temperature }} °C</div>
+
+    <div class="flex flex-col min-h-screen"> <!-- Ger hela appen full skärmhöjd och använder flexbox -->
+      <header class="bg-blue py-6 text-white fixed top-0 left-0 right-0 z-10">
+        <div class="px-4 max-w-6xl mx-1 flex justify-between items-center">
+          <RouterLink to="/" class="flex items-center">
+            <span>Hem</span>
+          </RouterLink>
+          <div>Aktuell plats: {{ latitude }} - {{ longitude }}</div>
+          <div>{{ temperature }} °C</div>
         </div>
       </header>
+      <main class="flex-grow overflow-y-auto pt-16 pb-16">
+        <!-- Adjust padding to account for header and footer height -->
+        <router-view class="px-4"></router-view>
+      </main>
 
-      <router-view></router-view>
-
-      <footer class="bg-blue-900 py-4">
-        <div class="wrapper flex justify-between items-center text-white">
+      <!-- Ger detta element flex-grow så det tar upp allt tillgängligt utrymme -->
+      <!-- Villkorlig rendering av fotern baserat på routens metadata -->
+      <footer v-if="$route.meta.showFooter"
+        class="rounded-t-lg bg-blue py-4 text-white fixed bottom-0 left-0 right-0 z-10">
+        <div class="p-4 max-w-6xl mx-4 flex justify-between items-center">
           <RouterLink to="/" class="flex items-center">
-            <img :src="homeIcon" alt="Home Icon" class="mr-2">
-            <!-- <span>Hem</span> -->
+            <img :src="homeIcon" alt="Home Icon" class="w-7 h-7 mr-2">
+
           </RouterLink>
           <RouterLink to="/packing" class="flex items-center">
-            <img :src="packingIcon" alt="Packing Icon" class="mr-2">
-            <!-- <span>Packning</span> -->
+            <img :src="packingIcon" alt="Packing Icon" class="w-7 h-7 mr-2">
           </RouterLink>
           <RouterLink to="/oversight" class="flex items-center">
-            <img :src="oversightIcon" alt="Packing Icon" class="mr-2">
-            <!-- <span>Översikt</span> -->
+            <img :src="oversightIcon" alt="Weather Icon" class="w-7 h-7 mr-2">
+
           </RouterLink>
           <RouterLink to="/notices" class="flex items-center">
-            <img :src="noticesIcon" alt="Notices Icon" class="mr-2">
-            <!-- <span>Notiser</span> -->
+            <img :src="noticesIcon" alt="Notices Icon" class="w-7 h-7 mr-2">
+
           </RouterLink>
           <RouterLink to="/settings" class="flex items-center">
-            <img :src="settingsIcon" alt="Settings Icon" class="mr-2">
-            <!-- <span>Inställningar</span> -->
+            <img :src="settingsIcon" alt="Settings Icon" class="w-7 h-7 mr-2">
+
+
           </RouterLink>
         </div>
       </footer>
     </div>
   </Suspense>
 </template>
-
-<style scoped>
-.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Stil för huvudrubrik och sidfot */
-header,
-footer {
-  background-color: #425890;
-  width: 100%;
-  margin-bottom: auto;
-  /* Bredden är 100% av förälderelementet */
-}
-
-/* Anpassa storleken på länkarna */
-.wrapper>div>div>a {
-  flex: 1;
-  /* Gör länkarna flexibla, så att de anpassar sig efter förälderns bredd */
-}
-</style>
