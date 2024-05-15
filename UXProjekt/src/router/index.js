@@ -8,6 +8,7 @@ import notices from '../views/NoticeView.vue'
 import settings from '../views/SettingsView.vue'
 import settingsprofile from '../views/SettingsViewProfile.vue'
 import settingsabout from '../views/SettingsViewAbout.vue'
+import settingshelp from '../views/SettingsViewHelp.vue'
 
 const routes = [
   {
@@ -62,6 +63,12 @@ const routes = [
     path: '/settingsabout',
     name: 'Settings About',
     component: settingsabout,
+    meta: { showFooter: true }
+  },
+  {
+    path: '/settingshelp',
+    name: 'Settings Help',
+    component: settingshelp,
     meta: { showFooter: true }
   }
 ]

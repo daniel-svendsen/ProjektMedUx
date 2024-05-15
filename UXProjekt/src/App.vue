@@ -46,12 +46,12 @@ onMounted(async () => {
           <div>{{ temperature }} °C</div>
         </div>
       </header>
-      <main class="flex-grow overflow-y-auto pt-16 pb-16">
-        <!-- Adjust padding to account for header and footer height -->
+      
+      <main class="flex-grow pt-16">
         <router-view class="px-4"></router-view>
       </main>
 
-      <!-- Ger detta element flex-grow så det tar upp allt tillgängligt utrymme -->
+
       <!-- Villkorlig rendering av fotern baserat på routens metadata -->
       <footer v-if="$route.meta.showFooter"
         class="rounded-t-lg bg-blue py-4 text-white fixed bottom-0 left-0 right-0">
