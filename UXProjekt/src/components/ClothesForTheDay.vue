@@ -112,13 +112,13 @@ export default {
                 const windSpeed = weatherObj.windSpeed;
                 const rain = weatherObj.averagePrecipitation;
 
-                if (this.temperature <= 5 && this.precipitation > 1 && this.precipitation < 50) {
+                if (temperature <= 5 && rain > 1 && rain < 50) {
                     clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor, paraply);
                 } else if (this.temperature <= 5) {
                     clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
-                } else if (this.temperature <= 15 && this.windSpeed <= 8) {
+                } else if (this.temperature <= 15 && windSpeed <= 8) {
                     clothes.push(keps, vårjacka, långbyxor, sneakers);
-                } else if (this.temperature > 15 && this.windSpeed >= 8 && this.precipitation >= 0) {
+                } else if (this.temperature > 15 && windSpeed >= 8 && this.precipitation >= 0) {
                     clothes.push(vindjacka, långbyxor, sneakers);
                 } else {
                     clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
