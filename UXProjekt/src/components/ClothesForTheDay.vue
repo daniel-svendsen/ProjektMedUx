@@ -177,6 +177,10 @@ export default {
                 weatherSymbol: 'custom' // Använd en symbol som representerar manuellt inställt väder
             };
             this.outfits.push(outfit);
+        },
+
+        getOutfitsForPacking() {
+            return this.outfits.flatMap(outfit => outfit.clothes);
         }
     }
 };
