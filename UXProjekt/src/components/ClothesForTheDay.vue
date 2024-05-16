@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper-carousel">
         <!-- <form @submit.prevent="generateOutfits">
             <label>Temperatur (°C):</label>
             <input type="number" v-model="temperature" min="-10" max="30" step="1">
@@ -23,15 +23,16 @@
                     </div>
                 </div>
 
-                <div v-if="popupVisible" class="popup-overlay">
-                    <div class="popup-content">
-                        <h3>Rekommenderade kläder</h3>
-                        <ul>
-                            <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing)
-                                }}</li>
-                        </ul>
-                    </div>
-                </div>
+
+            </div>
+        </div>
+        <div v-if="popupVisible" class="popup-overlay">
+            <div class="popup-content">
+                <h3>Rekommenderade kläder</h3>
+                <ul>
+                    <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing)
+                        }}</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -260,13 +261,19 @@ export default {
 .popup-overlay {
     background-color: #F2A42D;
     position: absolute;
-    bottom: 0;
+    /* bottom: 0; */
     /* Placera längst ner */
     left: 25%;
     /* Justera till vänster */
     width: 50%;
     /* Bredden ska täcka hela karusellen */
     align-items: center;
+}
+
+.wrapper-carousel {
+    align-content: center;
+    justify-content: center;
+    height: fit-content;
 }
 
 /* Media queries for mobile responsiveness */
