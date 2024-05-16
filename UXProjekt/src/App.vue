@@ -42,13 +42,13 @@ onMounted(async () => {
           <RouterLink to="/" class="flex items-center">
             <span>Hem</span>
           </RouterLink>
-          <div>Aktuell plats: {{ latitude }} - {{ longitude }}</div>
+          <div>Aktuell plats: <br>{{ latitude }} - {{ longitude }}</div>
           <div>{{ temperature }} °C</div>
         </div>
       </header>
 
-      <main class="flex-grow pt-16 ">
-        <router-view class="px-4"></router-view>
+      <main>
+        <router-view></router-view>
       </main>
 
 

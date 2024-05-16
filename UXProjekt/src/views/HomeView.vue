@@ -50,5 +50,8 @@ export default {
 
 =======
 <style>
-/* Anpassar layouten för väderdatan */
+.clothes-wrapper {
+  /* justify-content: center;
+  height: fit-content; */
+}
 </style>

@@ -22,19 +22,19 @@
                         </div>
                     </div>
                 </div>
-
+                <div v-if="popupVisible" class="popup-overlay">
+                    <div class="popup-content">
+                        <h3>Rekommenderade kläder</h3>
+                        <ul>
+                            <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing)
+                                }}</li>
+                        </ul>
+                    </div>
+                </div>
 
             </div>
         </div>
-        <div v-if="popupVisible" class="popup-overlay">
-            <div class="popup-content">
-                <h3>Rekommenderade kläder</h3>
-                <ul>
-                    <li v-for="(clothing, index) in selectedOutfit.clothes" :key="index">{{ getAltText(clothing)
-                        }}</li>
-                </ul>
-            </div>
-        </div>
+
     </div>
     <!-- <div>
         <div class="carousel rounded-box">
@@ -261,7 +261,7 @@ export default {
 .popup-overlay {
     background-color: #F2A42D;
     position: absolute;
-    /* bottom: 0; */
+    bottom: 0;
     /* Placera längst ner */
     left: 25%;
     /* Justera till vänster */
@@ -278,40 +278,60 @@ export default {
 
 /* Media queries for mobile responsiveness */
 @media only screen and (max-width: 768px) {
-    .carousel-item {
-        position: relative;
-        display: flex;
-        flex-direction: column;
+
+    .wrapper-carousel {
+        align-content: center;
+        justify-content: center;
+        bottom: 0;
+    }
+
+    .popup-overlay {
+        background-color: #F2A42D;
+        position: absolute;
+        bottom: 0;
+        /* Placera längst ner */
+        left: 25%;
+        /* Justera till vänster */
+        width: 50%;
+        /* Bredden ska täcka hela karusellen */
         align-items: center;
-        margin-right: 10px;
-        /* Adjust margin for mobile */
-    }
-
-    .carousel {
-        position: relative;
-        display: flex;
-        justify-content: left;
-        margin-bottom: 20px;
-    }
-
-    .outfit-item {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-    }
-
-    .clothing img {
-        min-width: auto;
-        height: 110px;
     }
 
     .weather-gif {
         position: relative;
-        width: 48%;
+        width: 50cqmax;
         height: 30%;
         justify-content: center;
-        margin-left: 10px;
+        margin-left: 75%;
         /* Adjust margin for mobile */
     }
+
+    .carousel-item {
+        position: relative;
+        justify-content: flex-start;
+        margin-right: 25cqmax;
+        /* Adjust margin for mobile */
+    }
+
+    /* .carousel {
+        position: relative;
+        display: flex;
+        justify-content: left;
+        margin-bottom: 20px;
+    } */
+
+    /* .outfit-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    } */
+
+    /* .clothing {
+        min-width: auto;
+        height: auto;
+        justify-content: center;
+    } */
+
+
 }
 </style>
