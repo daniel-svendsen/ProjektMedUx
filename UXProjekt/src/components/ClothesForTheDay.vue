@@ -1,5 +1,7 @@
 <template>
+
     <div class="wrapper-carousel">
+        <!-- <img class="logotype" src="@/assets/Ikonerstilarlogo/logotyp.png" alt="Logo"> -->
         <!-- <form @submit.prevent="generateOutfits">
             <label>Temperatur (°C):</label>
             <input type="number" v-model="temperature" min="-10" max="30" step="1">
@@ -10,6 +12,7 @@
             <button type="submit">Generera klädkombinationer</button>
         </form> -->
         <div class="carousel rounded-box">
+
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
                 :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
                 <div class="weather-gif">
@@ -274,6 +277,14 @@ export default {
     align-content: center;
     justify-content: center;
     height: fit-content;
+    align-items: center;
+    display: flex;
+
+}
+
+.logotype {
+    margin-left: auto;
+    z-index: -1;
 }
 
 /* Media queries for mobile responsiveness */
