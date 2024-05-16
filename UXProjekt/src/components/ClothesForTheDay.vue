@@ -2,7 +2,7 @@
 
     <div class="wrapper-carousel">
         <!-- <img class="logotype" src="@/assets/Ikonerstilarlogo/logotyp.png" alt="Logo"> -->
-        <form @submit.prevent="generateOutfits">
+        <!-- <form @submit.prevent="generateOutfits">
             <label>Temperatur (°C):</label>
             <input type="number" v-model="temperature" min="-10" max="30" step="1">
             <label>Vindhastighet (m/s):</label>
@@ -10,9 +10,9 @@
             <label>Nederbörd (mm):</label>
             <input type="number" v-model="precipitation" min="0" max="10" step="0.1">
             <button type="submit">Generera klädkombinationer</button>
-        </form>
-        <div class="carousel rounded-box">
+        </form> -->
 
+        <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
                 :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
                 <div class="weather-gif">
@@ -153,38 +153,38 @@ export default {
             this.selectedOutfit = outfit;
             this.popupVisible = !this.popupVisible;
         },
-        generateOutfits() {
-            // Återställ outfits-arrayen innan nya klädkombinationer genereras
-            this.outfits = [];
+        // generateOutfits() {
+        //     // Återställ outfits-arrayen innan nya klädkombinationer genereras
+        //     this.outfits = [];
 
-            // Skapa en klädkombination baserat på användarens inmatning
-            let clothes = [];
-            if (this.temperature <= 5 && this.precipitation > 1 && this.precipitation < 50) {
-                clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor, paraply);
-            } else if (this.temperature <= 5) {
-                clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
-            } else if (this.temperature <= 15 && this.windSpeed <= 8) {
-                clothes.push(keps, vårjacka, långbyxor, sneakers);
-            } else if (this.temperature > 15 && this.windSpeed >= 8 && this.precipitation >= 0) {
-                clothes.push(vindjacka, långbyxor, sneakers);
-            } else {
-                clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
-            }
+        //     // Skapa en klädkombination baserat på användarens inmatning
+        //     let clothes = [];
+        //     if (this.temperature <= 5 && this.precipitation > 1 && this.precipitation < 50) {
+        //         clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor, paraply);
+        //     } else if (this.temperature <= 5) {
+        //         clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
+        //     } else if (this.temperature <= 15 && this.windSpeed <= 8) {
+        //         clothes.push(keps, vårjacka, långbyxor, sneakers);
+        //     } else if (this.temperature > 15 && this.windSpeed >= 8 && this.precipitation >= 0) {
+        //         clothes.push(vindjacka, långbyxor, sneakers);
+        //     } else {
+        //         clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
+        //     }
 
-            if (this.precipitation > 0 && this.precipitation < 20 && !clothes.includes(paraply)) {
-                clothes.push(paraply);
-            } else if (this.precipitation >= 20 && !clothes.includes(regnjacka)) {
-                clothes.push(regnjacka, regnbyxor, stövlar, paraply);
-            }
+        //     if (this.precipitation > 0 && this.precipitation < 20 && !clothes.includes(paraply)) {
+        //         clothes.push(paraply);
+        //     } else if (this.precipitation >= 20 && !clothes.includes(regnjacka)) {
+        //         clothes.push(regnjacka, regnbyxor, stövlar, paraply);
+        //     }
 
-            // Skapa ett objekt som representerar klädkombinationen och lägg till det i outfits-arrayen
-            const outfit = {
-                time: new Date(), // Använda tiden för genereringen av klädkombinationen
-                clothes: clothes,
-                weatherSymbol: 'custom' // Använd en symbol som representerar manuellt inställt väder
-            };
-            this.outfits.push(outfit);
-        }
+        //     // Skapa ett objekt som representerar klädkombinationen och lägg till det i outfits-arrayen
+        //     const outfit = {
+        //         time: new Date(), // Använda tiden för genereringen av klädkombinationen
+        //         clothes: clothes,
+        //         weatherSymbol: 'custom' // Använd en symbol som representerar manuellt inställt väder
+        //     };
+        //     this.outfits.push(outfit);
+        // }
 
     }
 };
