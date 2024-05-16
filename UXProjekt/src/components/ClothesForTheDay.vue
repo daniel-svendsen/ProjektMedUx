@@ -214,6 +214,7 @@ export default {
         //     };
         //     this.outfits.push(outfit);
         // }
+
     }
 };
 </script>
