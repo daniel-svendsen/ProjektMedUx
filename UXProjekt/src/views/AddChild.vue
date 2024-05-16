@@ -1,7 +1,7 @@
 <template>
-    <div class="p-4 bg-view-bg">
+    <div class="p-4 min-h-screen bg-view-bg">
 
-        <h1 class="font-headline text-headline1 text-center">Lägg till barn</h1>
+        <h1 class="font-headline text-headline1 text-center mt-4">Lägg till barn</h1>
         <hr class="border-t border-gray-300 mx-auto w-64 my-2">
 
         <div class="form-control flex justify-center items-center">

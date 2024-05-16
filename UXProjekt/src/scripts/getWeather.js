@@ -1,7 +1,11 @@
 import { useGeolocation } from "./getPosition.js";
 
 export async function fetchWeatherData() {
-    const { latitude, longitude } = await useGeolocation();
+
+    const position = await useGeolocation();
+    let latitude = position.latitude;
+    let longitude = position.longitude;
+
     console.log(latitude, longitude)
 
     const category = 'pmp3g';
@@ -19,3 +23,4 @@ export async function fetchWeatherData() {
         return null;
     }
 }
+

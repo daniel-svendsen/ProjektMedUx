@@ -30,7 +30,7 @@ function createPackingList(weatherObjects) {
             clothes.push("Keps", "Solglasögon", "T-shirt", "Shorts", "Sandaler");
         }
 
-        if (rain > 0.1 && rain < 1) {
+        if (rain > 0 && rain < 1) {
             clothes.push("Paraply");
         }
         else if (rain > 1 && rain < 5) {

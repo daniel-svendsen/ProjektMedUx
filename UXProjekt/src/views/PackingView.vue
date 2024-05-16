@@ -11,14 +11,14 @@
                         <div @click="toggleMark(item)" class="relative cursor-pointer">
                             <img src="@/assets/Ikonerstilarlogo/packing-rectangle.png" alt="profile icon"
                                 class="mr-4 w-7 h-7">
-                            <img v-if="isMarked(item)" src="@/assets/Ikonerstilarlogo/packing-checkmark-icon.svg" alt="checkmark icon"
-                                class="absolute top-0 left-0 w-7 h-7">
+                            <img v-if="isMarked(item)" src="@/assets/Ikonerstilarlogo/packing-checkmark-icon.svg"
+                                alt="checkmark icon" class="absolute top-0 left-0 w-7 h-7">
                         </div>
                         <div class="flex-1 flex text-left font-large-text text-large-text">
                             {{ item }}
                         </div>
-                        <img @click="removeItem(item)" src="@/assets/Ikonerstilarlogo/packing-trash-icon.svg" alt="trash icon"
-                        class="ml-4 w-5 h-5 cursor-pointer">
+                        <img @click="removeItem(item)" src="@/assets/Ikonerstilarlogo/packing-trash-icon.svg"
+                            alt="trash icon" class="ml-4 w-5 h-5 cursor-pointer">
                     </div>
                 </li>
             </ul>
@@ -30,6 +30,7 @@
 
 <script>
 import { generatePackingList } from '@/scripts/getPackingList.js';
+
 
 export default {
     data() {
@@ -71,7 +72,7 @@ export default {
             }
         }
     }
-}
+    }
 </script>
 
 <style scoped>
