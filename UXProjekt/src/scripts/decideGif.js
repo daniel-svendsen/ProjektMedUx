@@ -18,3 +18,4 @@ export function decideGif(weatherSymbol){
         return ""; // Return empty string if no matching weather symbol
     }
 }
+    

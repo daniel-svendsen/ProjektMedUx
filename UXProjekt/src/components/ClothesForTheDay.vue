@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="generateOutfits">
+        <!-- <form @submit.prevent="generateOutfits">
             <label>Temperatur (°C):</label>
             <input type="number" v-model="temperature" min="-10" max="30" step="1">
             <label>Vindhastighet (m/s):</label>
@@ -8,10 +8,10 @@
             <label>Nederbörd (mm):</label>
             <input type="number" v-model="precipitation" min="0" max="10" step="0.1">
             <button type="submit">Generera klädkombinationer</button>
-        </form>
+        </form> -->
         <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
-                :style="getOutfitBackground(outfit.weatherSymbol)" @click="togglePopup(outfit)">
+                :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
                 <div class="weather-gif">
                     <div class="outfit-item">
                         <h2>{{ outfit.time }}</h2>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Popupruta -->
+
                 <div v-if="popupVisible" class="popup-overlay">
                     <div class="popup-content">
                         <h3>Rekommenderade kläder</h3>
@@ -35,6 +35,38 @@
             </div>
         </div>
     </div>
+    <!-- <div>
+        <div class="carousel rounded-box">
+            
+            <div v-for="(outfit, index) in outfits.slice(0, 1)" :key="index" class="carousel-item"
+                :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
+                
+                <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
+                    :alt="getAltText(clothing)">
+            </div>
+
+            <div v-for="(outfit, index) in outfits.slice(1, 2)" :key="index" class="carousel-item"
+                :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
+                
+                <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
+                    :alt="getAltText(clothing)">
+            </div>
+
+            <div v-for="(outfit, index) in outfits.slice(2, 3)" :key="index" class="carousel-item"
+                :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
+                
+                <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
+                    :alt="getAltText(clothing)">
+            </div>
+
+            <div v-for="(outfit, index) in outfits.slice(3, 4)" :key="index" class="carousel-item"
+                :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
+                
+                <img v-for="(clothing, index) in outfit.clothes" :key="index" :src="clothing"
+                    :alt="getAltText(clothing)">
+            </div>
+        </div>
+    </div> -->
 </template>
 
 
@@ -126,14 +158,18 @@ export default {
                     clothes.push(vindjacka, långbyxor);
                 }
 
-                return { time: weatherObj.date, clothes, weatherSymbol: weatherObj.weatherSymbol };
+                // Convert the weather symbol to a string
+                const weatherSymbolString = weatherObj.weatherSymbol.toString().slice(0, 1);
+
+                return { time: weatherObj.date, clothes, weatherSymbol: weatherSymbolString.slice(0, 1) };
             });
         },
         getOutfitBackground(weatherSymbol) {
+            const gifUrl = decideGif(weatherSymbol);
             return {
-                backgroundImage: `url(${decideGif(weatherSymbol)})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
+                backgroundImage: `url(${gifUrl})`,
+                // backgroundSize: 'cover',
+                // backgroundPosition: 'center'
             };
         },
         getAltText(imagePath) {
@@ -145,39 +181,39 @@ export default {
             this.selectedOutfit = outfit;
             this.popupVisible = !this.popupVisible;
         },
-        generateOutfits() {
-            // Återställ outfits-arrayen innan nya klädkombinationer genereras
-            this.outfits = [];
+        // generateOutfits() {
+        //     // Återställ outfits-arrayen innan nya klädkombinationer genereras
+        //     this.outfits = [];
 
-            // Skapa en klädkombination baserat på användarens inmatning
-            let clothes = [];
-            if (this.temperature <= 5) {
-                clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
-            } else if (this.temperature <= 15) {
-                clothes.push(keps, vårjacka, långbyxor, sneakers);
-            } else {
-                clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
-            }
+        //     // Skapa en klädkombination baserat på användarens inmatning
+        //     let clothes = [];
+        //     if (this.temperature <= 5) {
+        //         clothes.push(mössa, halsduk, vinterjacka, vantehöger, vantevänster, kängor);
+        //     } else if (this.temperature <= 15) {
+        //         clothes.push(keps, vårjacka, långbyxor, sneakers);
+        //     } else {
+        //         clothes.push(keps, solglasögon, tshirt, shorts, sandaler);
+        //     }
 
-            if (this.precipitation > 0 && this.precipitation < 2) {
-                clothes.push(paraply);
-            }
-            if (this.precipitation > 1 && this.precipitation < 5) {
-                clothes.push(regnjacka, regnbyxor, stövlar, paraply);
-            }
+        //     if (this.precipitation > 0 && this.precipitation < 2) {
+        //         clothes.push(paraply);
+        //     }
+        //     if (this.precipitation > 1 && this.precipitation < 5) {
+        //         clothes.push(regnjacka, regnbyxor, stövlar, paraply);
+        //     }
 
-            if (this.temperature > 0 && this.windSpeed >= 8) {
-                clothes.push(vindjacka, långbyxor);
-            }
+        //     if (this.temperature > 0 && this.windSpeed >= 8) {
+        //         clothes.push(vindjacka, långbyxor);
+        //     }
 
-            // Skapa ett objekt som representerar klädkombinationen och lägg till det i outfits-arrayen
-            const outfit = {
-                time: new Date(), // Använda tiden för genereringen av klädkombinationen
-                clothes: clothes,
-                weatherSymbol: 'custom' // Använd en symbol som representerar manuellt inställt väder
-            };
-            this.outfits.push(outfit);
-        }
+        //     // Skapa ett objekt som representerar klädkombinationen och lägg till det i outfits-arrayen
+        //     const outfit = {
+        //         time: new Date(), // Använda tiden för genereringen av klädkombinationen
+        //         clothes: clothes,
+        //         weatherSymbol: 'custom' // Använd en symbol som representerar manuellt inställt väder
+        //     };
+        //     this.outfits.push(outfit);
+        // }
     }
 };
 </script>
@@ -225,10 +261,11 @@ export default {
     position: absolute;
     bottom: 0;
     /* Placera längst ner */
-    left: 0;
+    left: 25%;
     /* Justera till vänster */
-    width: 100%;
+    width: 50%;
     /* Bredden ska täcka hela karusellen */
+    align-items: center;
 }
 
 /* Media queries for mobile responsiveness */

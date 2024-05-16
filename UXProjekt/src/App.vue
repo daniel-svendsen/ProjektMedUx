@@ -46,15 +46,14 @@ onMounted(async () => {
           <div>{{ temperature }} °C</div>
         </div>
       </header>
-      
-      <main class="flex-grow pt-16">
+
+      <main class="flex-grow pt-16 ">
         <router-view class="px-4"></router-view>
       </main>
 
 
       <!-- Villkorlig rendering av fotern baserat på routens metadata -->
-      <footer v-if="$route.meta.showFooter"
-        class="rounded-t-lg bg-blue py-4 text-white fixed bottom-0 left-0 right-0">
+      <footer v-if="$route.meta.showFooter" class="rounded-t-lg bg-blue py-4 text-white fixed bottom-0 left-0 right-0">
         <div class="p-4 max-w-6xl mx-4 flex justify-between items-center">
           <RouterLink to="/" class="flex items-center">
             <img :src="homeIcon" alt="Home Icon" class="w-7 h-7 mr-2">
