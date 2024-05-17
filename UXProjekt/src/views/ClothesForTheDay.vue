@@ -40,24 +40,24 @@ import { decideGif } from '@/scripts/decideGif.js';
 
 // Importera bilderna
 import vinterjacka from '@/assets/Barnkläder/vinterjacka.png';
-import mössa from '@/assets/Barnkläder/mössa.png';
+import mössa from '@/assets/Barnkläder/mossa.png';
 import halsduk from '@/assets/Barnkläder/halsduk.png';
-import vantehöger from '@/assets/Barnkläder/vante höger.png';
-import vantevänster from '@/assets/Barnkläder/vante vänster.png';
-import kängor from '@/assets/Barnkläder/Kängor.png';
-import vårjacka from '@/assets/Barnkläder/Vårjacka.png';
-import långbyxor from '@/assets/Barnkläder/Långbyxor.png';
-import sneakers from '@/assets/Barnkläder/Sneakers.png';
-import tshirt from '@/assets/Barnkläder/T-shirt.png';
-import shorts from '@/assets/Barnkläder/Shorts.png';
-import sandaler from '@/assets/Barnkläder/Sandaler.png';
-import keps from '@/assets/Barnkläder/Keps.png';
-import solglasögon from '@/assets/Barnkläder/Solglasögon.png';
-import regnjacka from '@/assets/Barnkläder/Regnjacka.png';
-import regnbyxor from '@/assets/Barnkläder/Regnbyxor.png';
-import stövlar from '@/assets/Barnkläder/Stövlar.png';
-import paraply from '@/assets/Barnkläder/Paraply.png';
-import vindjacka from '@/assets/Barnkläder/Vindjacka.png';
+import vantehöger from '@/assets/Barnkläder/vante-hoger.png';
+import vantevänster from '@/assets/Barnkläder/vante-vanster.png';
+import kängor from '@/assets/Barnkläder/kangor.png';
+import vårjacka from '@/assets/Barnkläder/varjacka.png';
+import långbyxor from '@/assets/Barnkläder/langbyxor.png';
+import sneakers from '@/assets/Barnkläder/sneakers.png';
+import tshirt from '@/assets/Barnkläder/t-shirt.png';
+import shorts from '@/assets/Barnkläder/shorts.png';
+import sandaler from '@/assets/Barnkläder/sandaler.png';
+import keps from '@/assets/Barnkläder/keps.png';
+import solglasögon from '@/assets/Barnkläder/solglasogon.png';
+import regnjacka from '@/assets/Barnkläder/regnjacka.png';
+import regnbyxor from '@/assets/Barnkläder/regnbyxor.png';
+import stövlar from '@/assets/Barnkläder/stovlar.png';
+import paraply from '@/assets/Barnkläder/paraply.png';
+import vindjacka from '@/assets/Barnkläder/vindjacka.png';
 
 export default {
     data() {
