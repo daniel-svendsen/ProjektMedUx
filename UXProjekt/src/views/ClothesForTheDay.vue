@@ -1,5 +1,5 @@
 <template>
-    <!-- Carousel from DaisyUI, goes through 4 objects in outfits and makes 4 carousel elements. Popup for each element -->
+    <!-- Carousel from DaisyUI, goes through 4 objects in outfits and makes 4 carousel elements. Popup with clothestexts for each element -->
     <div class="wrapper-carousel">
         <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
@@ -32,7 +32,6 @@
 
 <script>
 import { filterWeatherDataByTime } from '@/scripts/filterWeatherDataByTime.js';
-import { useUserStore } from '@/stores/userStore';
 import { decideGif } from '@/scripts/decideGif.js';
 
 // Importera bilderna
@@ -66,10 +65,6 @@ export default {
         };
     },
     computed: {
-        children() {
-            const store = useUserStore();
-            return store.userChildren;
-        }
     },
     async created() {
         try {
@@ -82,16 +77,6 @@ export default {
         }
     },
     methods: {
-        nextOutfit() {
-            if (this.currentOutfitIndex < this.outfits.length - 1) {
-                this.currentOutfitIndex++;
-            }
-        },
-        prevOutfit() {
-            if (this.currentOutfitIndex > 0) {
-                this.currentOutfitIndex--;
-            }
-        },
         // Creates outfits based on the weatherobjects and the clothing logic
         createOutfits(weatherObjects) {
             return weatherObjects.map(weatherObj => {
