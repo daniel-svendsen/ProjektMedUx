@@ -7,7 +7,7 @@
 
         <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
-                :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
+                @click="togglePopup(outfit)">
                 <div class="weather-gif">
                     <div class="outfit-item">
                         <h2>{{ outfit.time }}</h2>

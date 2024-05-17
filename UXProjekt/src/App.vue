@@ -18,8 +18,8 @@ const temperature = ref(null);
 useGeolocation().then(position => {
   latitude.value = position.latitude;
   longitude.value = position.longitude;
-  console.log('Latitude:', latitude);
-  console.log('Longitude:', longitude);
+  // console.log('Latitude:', latitude);
+  // console.log('Longitude:', longitude);
 });
 
 // Hämta temperaturdatan från getWeatherObjectsList() när komponenten renderas
@@ -27,7 +27,7 @@ onMounted(async () => {
   const weatherObjects = await getWeatherObjectsList();
   if (weatherObjects && weatherObjects.length > 0) {
     temperature.value = weatherObjects[0].temperature;
-    console.log('Temperature:', temperature);
+    // console.log('Temperature:', temperature);
   }
 });
 </script>
