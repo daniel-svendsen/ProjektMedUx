@@ -1,5 +1,6 @@
 import { useGeolocation } from "./getPosition.js";
 
+// Gets position from Geolocation and uses the longitude and latitude to fetch weatherdata
 export async function fetchWeatherData() {
     const { latitude, longitude } = await useGeolocation();
     console.log(latitude, longitude)

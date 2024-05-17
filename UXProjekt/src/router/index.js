@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import createprofile from '../views/CreateProfile.vue'
 import addchild from '../views/AddChild.vue'
-import home from '../views/HomeView.vue'
+import home from '../views/ClothesForTheDay.vue'
 import packing from '../views/PackingView.vue'
 import oversight from '../views/OversightView.vue'
 import notices from '../views/NoticeView.vue'

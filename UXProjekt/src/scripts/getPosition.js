@@ -1,5 +1,6 @@
 // getPosition.js
 
+// Gets position from GeoLocation
 export async function useGeolocation() {
     return new Promise((resolve, reject) => {
         if ("geolocation" in navigator) {

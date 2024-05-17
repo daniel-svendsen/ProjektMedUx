@@ -2,6 +2,7 @@
 import { fetchWeatherData } from './getWeather.js';
 import { transformWeatherData } from './translateData.js';
 
+// Gets all the weather and filters out
 export async function getWeatherObjectsList() {
     try {
         const weatherData = await fetchWeatherData();

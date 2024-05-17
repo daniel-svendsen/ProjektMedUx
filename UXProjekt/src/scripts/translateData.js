@@ -1,4 +1,6 @@
 // translateData.js
+
+// Translates data to readable names
 const parameterMappings = {
     "spp": "Andel nederbörd i frusen form",
     "pcat": "Nederbördskategori",
@@ -72,12 +74,8 @@ export function transformWeatherData(weatherData) {
             return ['Wsymb2', 't', 'pmean', 'ws'].includes(param.name);
         }).map(param => {
             let transformedValue = param.values[0];
-            let iconUrl = '';  // Hållare för URL till ikonen
             switch (param.name) {
                 case 'Wsymb2':
-                    // Generera URL för vädersymbolen
-                    // iconUrl = `https://www.smhi.se/polopoly_fs/1.27958.1518507527!/image/${transformedValue}.png_gen/derivatives/Original_259px/image/${transformedValue}.png`;
-                    // transformedValue = iconUrl;  // Använd URL istället för text
                     break;
                 case 't':
                     param.unit = '°C'; // Add the temperature unit
@@ -92,7 +90,7 @@ export function transformWeatherData(weatherData) {
                     transformedValue = param.values[0];
             }
             const readableName = parameterMappings[param.name] || param.name;
-            return { ...param, name: readableName, values: [transformedValue], iconUrl };
+            return { ...param, name: readableName, values: [transformedValue] };
         });
         // Convert the timestamp to UTC+2
         const utcPlus2Time = convertToUTCPlus2(new Date(entry.validTime));
