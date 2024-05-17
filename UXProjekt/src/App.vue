@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'; // Importera ref från vue-paketet
-import { onMounted } from 'vue'; // Importera onMounted från vue-paketet
+import { ref, onMounted } from 'vue'; // Importera ref från vue-paketet
 import { useGeolocation } from '@/scripts/getPosition.js';
 import { getWeatherObjectsList } from '@/scripts/getAll.js'; // Importera getWeatherObjectsList
 

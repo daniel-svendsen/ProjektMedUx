@@ -1,6 +1,10 @@
 <template>
+
+    <img class="logotype" src="@/assets/Ikonerstilarlogo/logotyp.png" alt="">
+
     <!-- Carousel from DaisyUI, goes through 4 objects in outfits and makes 4 carousel elements. Popup with clothestexts for each element -->
     <div class="wrapper-carousel">
+
         <div class="carousel rounded-box">
             <div v-for="(outfit, index) in outfits.slice(0, 4)" :key="index" class="carousel-item"
                 :style="getOutfitBackground(outfit.weatherSymbol.slice(0, 1))" @click="togglePopup(outfit)">
@@ -139,33 +143,25 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 70%;
-}
-
-.carousel {
-    position: relative;
-    display: flex;
-    justify-content: left;
-    margin-bottom: 20px;
-}
-
-.outfit-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    margin-right: 75vw;
+    width: 50vw;
+    height: 75vh;
+    z-index: 2;
 }
 
 .clothing img {
-    min-width: auto;
-    height: 110px;
+    width: 5vw;
+    height: 10vh;
+    margin-left: 11vw;
+    margin-top: 0vh;
+}
+
+.clothing {
+    margin-top: 8vh;
 }
 
 .weather-gif {
     position: relative;
-    width: 40%;
-    height: 30%;
-    justify-content: center;
-    margin-left: 190px;
 }
 
 .popup-overlay {
@@ -178,16 +174,23 @@ export default {
 }
 
 .wrapper-carousel {
+    position: relative;
     align-content: center;
     justify-content: center;
     align-items: center;
     display: flex;
-
+    margin-top: 12vh;
+    margin-bottom: 12vh;
+    z-index: 1;
 }
 
 .logotype {
+    position: absolute;
     margin-left: auto;
     z-index: -1;
+    width: 45vw;
+    margin-top: 30vh;
+    right: 0;
 }
 
 /* Media queries for mobile responsiveness */
@@ -196,7 +199,10 @@ export default {
     .wrapper-carousel {
         align-content: center;
         justify-content: center;
-        bottom: 0;
+        align-items: center;
+        display: flex;
+        margin-top: 14vh;
+        margin-bottom: 12vh;
     }
 
     .popup-overlay {
@@ -210,16 +216,38 @@ export default {
 
     .weather-gif {
         position: relative;
-        width: 50cqmax;
-        height: 30%;
-        justify-content: center;
-        margin-left: 75%;
+        width: 100vw;
+        height: 75vh;
     }
 
     .carousel-item {
         position: relative;
-        justify-content: flex-start;
-        margin-right: 25cqmax;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 75vw;
+        width: 100vw;
+    }
+
+    .clothing img {
+        width: 17vw;
+        height: 10vh;
+        margin-left: 43vw;
+    }
+
+    .clothing {
+        margin-top: 3vh;
+    }
+
+    .logotype {
+        right: 50%;
+        /* Position relative to the center */
+        transform: translateX(50%);
+        /* Center the logotype */
+        left: 50%;
+        width: 100vw;
+        height: 15vh;
+        /* Ensure it's centered from both sides */
     }
 }
 </style>
