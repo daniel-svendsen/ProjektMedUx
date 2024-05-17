@@ -34,10 +34,9 @@ onMounted(async () => {
 
 <template>
   <Suspense>
-
     <div class="flex flex-col min-h-screen"> <!-- Ger hela appen full skärmhöjd och använder flexbox -->
       <header class="bg-blue py-6 text-white fixed top-0 left-0 right-0 z-10">
-        <div class="px-4 max-w-6xl mx-1 flex justify-between items-center">
+        <div class="px-4 max-w-screen-lg mx-auto flex justify-between items-center">
           <RouterLink to="/" class="flex items-center">
             <span>Hem</span>
           </RouterLink>
@@ -47,32 +46,31 @@ onMounted(async () => {
       </header>
 
       <main>
-        <router-view></router-view>
+        <RouterView />
       </main>
-
 
       <!-- Villkorlig rendering av fotern baserat på routens metadata -->
       <footer v-if="$route.meta.showFooter" class="rounded-t-lg bg-blue py-4 text-white fixed bottom-0 left-0 right-0">
-        <div class="p-4 max-w-6xl mx-4 flex justify-between items-center">
+        <div class="p-4 max-w-screen-lg mx-auto flex justify-between items-center">
           <RouterLink to="/" class="flex items-center">
             <img :src="homeIcon" alt="Home Icon" class="w-7 h-7 mr-2">
-
+            <span class="hidden lg:block">Hem</span>
           </RouterLink>
           <RouterLink to="/packing" class="flex items-center">
             <img :src="packingIcon" alt="Packing Icon" class="w-7 h-7 mr-2">
+            <span class="hidden lg:block">Packning</span>
           </RouterLink>
           <RouterLink to="/oversight" class="flex items-center">
             <img :src="oversightIcon" alt="Weather Icon" class="w-7 h-7 mr-2">
-
+            <span class="hidden lg:block">Översikt</span>
           </RouterLink>
           <RouterLink to="/notices" class="flex items-center">
             <img :src="noticesIcon" alt="Notices Icon" class="w-7 h-7 mr-2">
-
+            <span class="hidden lg:block">Notiser</span>
           </RouterLink>
           <RouterLink to="/settings" class="flex items-center">
             <img :src="settingsIcon" alt="Settings Icon" class="w-7 h-7 mr-2">
-
-
+            <span class="hidden lg:block">Inställningar</span>
           </RouterLink>
         </div>
       </footer>
