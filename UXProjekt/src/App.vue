@@ -46,7 +46,7 @@ onMounted(async () => {
       </header>
 
       <main class="flex-grow pt-16">
-        <router-view class="px-4"></router-view>
+        <router-view></router-view>
       </main>
       <!-- Villkorlig rendering av fotern baserat på routens metadata -->
       <footer v-if="$route.meta.showFooter"
@@ -77,3 +77,15 @@ onMounted(async () => {
     </div>
   </Suspense>
 </template>
+
+<style scoped>
+header,
+footer {
+  background-color: #425890;
+  width: 100%;
+}
+
+.wrapper>div>div>a {
+  flex: 1;
+}
+</style>

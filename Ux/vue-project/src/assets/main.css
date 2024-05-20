@@ -1,0 +1,142 @@
+/* General styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+/* Title bar styles */
+#titleBar {
+  background-color: black;
+  width: 100%;
+  height: 4rem; /* 4rem for title bar height */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#page {
+  height: 100%;
+  background-color: aqua;
+  width: calc(100% / 4);
+}
+
+#temperature {
+  height: 100%;
+  background-color: beige;
+  width: calc(100% / 4);
+}
+
+#location {
+  height: 100%;
+  background-color: blue;
+  width: calc(100% / 4);
+}
+
+/* Text container styles */
+.text-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* Align content at the top */
+  flex-direction: column; /* Stack the h1 and p vertically */
+  height: 2rem; /* 4rem for text container height */
+  text-align: center; /* Center the text */
+  margin-bottom: 0.5rem;
+}
+
+/* Child name (h1) and display time (p) styles */
+.child-name {
+  font-size: 1.1rem;
+}
+
+.display-time {
+  font-size: 0.7rem;
+}
+
+/* Image container styles */
+.image-container {
+  width: 40%; /* 40% width */
+  margin: auto;
+  overflow: hidden;
+  position: relative; /* Needed to position the button container */
+}
+
+.image-slide {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10rem; /* 10rem (160px) height */
+}
+
+/* Button container styles */
+.button-container {
+  position: absolute; /* To position the button within the image-container */
+  top: 50%; /* Vertically center */
+  right: 20%; /* Adjust the horizontal position as needed */
+  transform: translateY(-50%); /* Centering the button */
+}
+
+#weatherDisplay {
+  background-color: cadetblue;
+  width: 100%;
+  height: 6.25rem; /* 6.25rem (100px) height */
+}
+
+/* Navigation bar styles */
+#navicationBar {
+  background-color: aqua;
+  width: 100%;
+  height: 6.25rem; /* 6.25rem (100px) height */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#homeButton,
+#packageButton,
+#overview,
+#notification,
+#Settings {
+  height: 40%; /* 40% height */
+  width: 10%; /* 10% width */
+  border-radius: 0.5rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+#homeButton {
+  background-color: blue;
+}
+
+#packageButton {
+  background-color: palevioletred;
+}
+
+#overview {
+  background-color: saddlebrown;
+}
+
+#notification {
+  background-color: olive;
+}
+
+#Settings {
+  background-color: red;
+}
+
+/* Navigation text styles */
+.navigation-text {
+  color: white;
+  position: absolute;
+  top: 2.8rem; /* Position the text at the bottom of the button */
+  font-size: 0.7rem;
+}

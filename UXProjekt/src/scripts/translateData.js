@@ -1,3 +1,4 @@
+
 // translateData.js
 
 // Translates data to readable names
@@ -97,3 +98,4 @@ export function transformWeatherData(weatherData) {
         return { ...entry, parameters: transformedParameters, validTime: utcPlus2Time };
     });
 }
+
