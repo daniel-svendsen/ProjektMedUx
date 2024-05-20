@@ -216,8 +216,13 @@ h2 {
         justify-content: center;
         align-items: center;
         display: flex;
+<<<<<<< HEAD
         /* margin-top: 14vh;*/
         /* margin-bottom: 10vh; */
+=======
+        /* margin-top: 14vh;
+        margin-bottom: 14vh; */
+>>>>>>> db76147902c9d16e862e1ec2ce159cf73cdf707b
     }
 
     .popup-overlay {
@@ -232,7 +237,10 @@ h2 {
     .popup-content {
         align-items: center;
         justify-content: center;
+<<<<<<< HEAD
         color: black;
+=======
+>>>>>>> db76147902c9d16e862e1ec2ce159cf73cdf707b
     }
 
     .weather-gif {
