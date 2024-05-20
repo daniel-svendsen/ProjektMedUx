@@ -5,7 +5,7 @@
             <div v-if="loading">Laddar...</div>
             <div v-else class="weather-container">
                 <div class="weather-entry">
-                    <header id="informationBarContainer">
+                    <!-- <header id="informationBarContainer">
                         <div class="informationBarDiv">
                             <h2 id="weather">Väder</h2>
                         </div>
@@ -15,7 +15,7 @@
                         <div class="informationBarDiv">
                             <h2 id="degrees">{{ degrees }}</h2>
                         </div>
-                    </header>
+                    </header> -->
 
                     <main id="weatherDisplayContainer">
                         <div class="weatherDisplayDiv">
@@ -50,7 +50,7 @@
                         </div>
                     </main>
 
-                    <footer id="navigationBarContainer"></footer>
+                    <!-- <footer id="navigationBarContainer"></footer> -->
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { getWeatherObjectsList } from '../scripts/getAll.js';
+import { getWeatherObjectsList } from '../scripts/getAllOversight.js';
 import { useGeolocation } from "../scripts/getPosition.js";
 
 export default {
@@ -175,6 +175,7 @@ export default {
     background-color: darkblue;
     display: flex;
     flex-direction: column;
+    margin-top: 4vh;
 }
 
 .weatherDisplayDiv {

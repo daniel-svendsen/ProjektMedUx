@@ -35,7 +35,7 @@ onMounted(async () => {
 <template>
   <Suspense>
     <div class="flex flex-col min-h-screen"> <!-- Ger hela appen full skärmhöjd och använder flexbox -->
-      <header class="bg-blue py-6 text-white fixed top-0 left-0 right-0 z-50">
+      <header class="bg-blue py-3 text-white fixed top-0 left-0 right-0 z-50">
         <div class="px-4 max-w-screen-lg mx-auto flex justify-between items-center">
           <RouterLink to="/" class="flex items-center">
             <span>Hem</span>
@@ -45,7 +45,7 @@ onMounted(async () => {
         </div>
       </header>
 
-      <main class="flex-grow pt-16">
+      <main class="flex-grow pt-16 bg-view-bg">
         <router-view></router-view>
       </main>
       <!-- Villkorlig rendering av fotern baserat på routens metadata -->
