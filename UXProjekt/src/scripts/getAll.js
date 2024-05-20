@@ -1,4 +1,3 @@
-// getAll.js
 import { fetchWeatherData } from './getWeather.js';
 import { transformWeatherData } from './translateData.js';
 
@@ -19,25 +18,29 @@ export async function getWeatherObjectsList() {
             return acc;
         }, {});
 
-        // Calculate lowest and highest temperature and average precipitation for each day
+        // Calculate lowest and highest temperature, average precipitation, and weather symbol for each day
         for (const date in groupedData) {
             const entries = groupedData[date];
-            let lowestTemp = Number.MAX_VALUE;
-            let highestTemp = Number.MIN_VALUE;
+            let lowestTemp = entries[0].parameters.find(param => param.name === 'Temperatur').values[0];
+            let highestTemp = entries[0].parameters.find(param => param.name === 'Temperatur').values[0];
             let totalPrecipitation = 0; // Total precipitation for the day
+            let weatherSymbol = ''; // Weather symbol for the day
             entries.forEach(entry => {
                 const temp = entry.parameters.find(param => param.name === 'Temperatur').values[0];
                 lowestTemp = Math.min(lowestTemp, temp);
                 highestTemp = Math.max(highestTemp, temp);
                 const precipitation = entry.parameters.find(param => param.name === 'Genomsnittlig nederbörd').values[0];
                 totalPrecipitation += precipitation;
+                // Get the weather symbol
+                weatherSymbol = entry.parameters.find(param => param.name === 'Vädersymbol').iconUrl;
             });
-            const averagePrecipitation = totalPrecipitation / entries.length; // Calculate average precipitation
+            const averagePrecipitation = (totalPrecipitation / entries.length).toFixed(2); // Calculate and round average precipitation to two decimal places
             weatherObjects.push({
                 date: new Date(date),
                 lowestTemperature: lowestTemp,
                 highestTemperature: highestTemp,
-                averagePrecipitation: averagePrecipitation
+                averagePrecipitation: averagePrecipitation,
+                weatherSymbol: weatherSymbol // Add weather symbol to the object
             });
         }
 

@@ -1,3 +1,4 @@
+
 // translateData.js
 const parameterMappings = {
     "spp": "Andel nederbörd i frusen form",
@@ -99,3 +100,4 @@ export function transformWeatherData(weatherData) {
         return { ...entry, parameters: transformedParameters, validTime: utcPlus2Time };
     });
 }
+
