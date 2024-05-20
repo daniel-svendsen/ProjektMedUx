@@ -232,6 +232,7 @@ h2 {
     .popup-content {
         align-items: center;
         justify-content: center;
+        color: black;
     }
 
     .weather-gif {
