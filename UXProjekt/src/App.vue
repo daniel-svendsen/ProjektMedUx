@@ -1,37 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { ref, onMounted } from 'vue'; // Importera ref från vue-paketet
-import { useGeolocation } from '@/scripts/getPosition.js';
-import { getWeatherObjectsList } from '@/scripts/getAll.js'; // Importera getWeatherObjectsList
-
-import homeIcon from '@/assets/Ikonerstilarlogo/home-icon-white.svg';
-import packingIcon from '@/assets/Ikonerstilarlogo/packing-white.svg';
-import noticesIcon from '@/assets/Ikonerstilarlogo/notice-white.svg';
-import settingsIcon from '@/assets/Ikonerstilarlogo/settings-white.svg';
-import oversightIcon from '@/assets/Ikonerstilarlogo/weather-white.svg';
-
-const latitude = ref(null);
-const longitude = ref(null);
-const temperature = ref(null);
-
-// Anropa useGeolocation för att hämta den aktuella positionen
-useGeolocation().then(position => {
-  latitude.value = position.latitude;
-  longitude.value = position.longitude;
-  // console.log('Latitude:', latitude);
-  // console.log('Longitude:', longitude);
-});
-
-// Hämta temperaturdatan från getWeatherObjectsList() när komponenten renderas
-onMounted(async () => {
-  const weatherObjects = await getWeatherObjectsList();
-  if (weatherObjects && weatherObjects.length > 0) {
-    temperature.value = weatherObjects[0].temperature;
-    // console.log('Temperature:', temperature);
-  }
-});
-</script>
-
 <template>
   <Suspense>
     <div class="flex flex-col min-h-screen"> <!-- Ger hela appen full skärmhöjd och använder flexbox -->
@@ -40,7 +6,7 @@ onMounted(async () => {
           <RouterLink to="/" class="flex items-center">
             <span>Hem</span>
           </RouterLink>
-          <div>Aktuell plats: <br>{{ latitude }} - {{ longitude }}</div>
+          <div>{{ city }}</div>
           <div>{{ temperature }} °C</div>
         </div>
       </header>
@@ -77,3 +43,38 @@ onMounted(async () => {
     </div>
   </Suspense>
 </template>
+
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import { ref, onMounted } from 'vue'; // Importera ref från vue-paketet
+import { useGeolocation } from '@/scripts/getPosition.js';
+import { getWeatherObjectsList } from '@/scripts/getAll.js'; // Importera getWeatherObjectsList
+import { getCityFromCoordinates } from '@/scripts/getCityName';
+
+import homeIcon from '@/assets/Ikonerstilarlogo/home-icon-white.svg';
+import packingIcon from '@/assets/Ikonerstilarlogo/packing-white.svg';
+import noticesIcon from '@/assets/Ikonerstilarlogo/notice-white.svg';
+import settingsIcon from '@/assets/Ikonerstilarlogo/settings-white.svg';
+import oversightIcon from '@/assets/Ikonerstilarlogo/weather-white.svg';
+
+const latitude = ref(null);
+const longitude = ref(null);
+const temperature = ref(null);
+const city = ref(''); // Define a ref for city
+
+// Anropa useGeolocation för att hämta den aktuella positionen
+useGeolocation().then(async position => {
+  latitude.value = position.latitude;
+  longitude.value = position.longitude;
+  city.value = await getCityFromCoordinates(latitude.value, longitude.value); // Get the city name from coordinates
+});
+
+// Hämta temperaturdatan från getWeatherObjectsList() när komponenten renderas
+onMounted(async () => {
+  const weatherObjects = await getWeatherObjectsList();
+  if (weatherObjects && weatherObjects.length > 0) {
+    temperature.value = weatherObjects[0].temperature;
+  }
+});
+
+</script>

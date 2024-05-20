@@ -2,7 +2,7 @@
 
     <body id="meo">
         <div>
-            <div v-if="loading">Laddar...</div>
+            <div v-if="loading"><span class="loading loading-spinner text-info"></span></div>
             <div v-else class="weather-container">
                 <div class="weather-entry">
                     <!-- <header id="informationBarContainer">
