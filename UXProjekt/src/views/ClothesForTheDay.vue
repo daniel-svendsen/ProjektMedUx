@@ -170,7 +170,6 @@ export default {
     bottom: 0;
     left: 25%;
     width: 50%;
-    align-items: center;
 }
 
 .wrapper-carousel {
@@ -182,6 +181,22 @@ export default {
     margin-top: 12vh;
     margin-bottom: 12vh;
     z-index: 1;
+    text-align: center;
+    height: 75vh;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.popup-content h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .logotype {
@@ -201,8 +216,8 @@ export default {
         justify-content: center;
         align-items: center;
         display: flex;
-        margin-top: 14vh;
-        margin-bottom: 12vh;
+        /* margin-top: 14vh;
+        margin-bottom: 14vh; */
     }
 
     .popup-overlay {
@@ -212,6 +227,11 @@ export default {
         left: 25%;
         width: 50%;
         align-items: center;
+    }
+
+    .popup-content {
+        align-items: center;
+        justify-content: center;
     }
 
     .weather-gif {
