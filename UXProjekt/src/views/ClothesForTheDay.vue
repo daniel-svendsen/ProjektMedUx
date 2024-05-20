@@ -149,15 +149,15 @@ export default {
     z-index: 2;
 }
 
+h2 {
+    margin-top: 5vh;
+}
+
 .clothing img {
     width: 5vw;
     height: 10vh;
     margin-left: 11vw;
     margin-top: 0vh;
-}
-
-.clothing {
-    margin-top: 8vh;
 }
 
 .weather-gif {
@@ -202,9 +202,9 @@ export default {
 .logotype {
     position: absolute;
     margin-left: auto;
-    z-index: -1;
+    z-index: 1;
     width: 45vw;
-    margin-top: 30vh;
+    margin-top: 1vh;
     right: 0;
 }
 
@@ -216,8 +216,8 @@ export default {
         justify-content: center;
         align-items: center;
         display: flex;
-        /* margin-top: 14vh;
-        margin-bottom: 14vh; */
+        /* margin-top: 14vh;*/
+        /* margin-bottom: 10vh; */
     }
 
     .popup-overlay {
@@ -232,6 +232,7 @@ export default {
     .popup-content {
         align-items: center;
         justify-content: center;
+        color: black;
     }
 
     .weather-gif {
@@ -256,7 +257,7 @@ export default {
     }
 
     .clothing {
-        margin-top: 3vh;
+        margin-top: -3vh;
     }
 
     .logotype {

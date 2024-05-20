@@ -45,7 +45,7 @@ onMounted(async () => {
         </div>
       </header>
 
-      <main class="flex-grow pt-16">
+      <main class="flex-grow pt-16 bg-view-bg">
         <router-view></router-view>
       </main>
       <!-- Villkorlig rendering av fotern baserat på routens metadata -->
